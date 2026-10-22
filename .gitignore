@@ -1,0 +1,13 @@
+## Visual Studio / .NET
+[Bb]in/
+[Oo]bj/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## OS Files
+Thumbs.db
+Desktop.ini
+.DS_Store
