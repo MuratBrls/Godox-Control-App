@@ -659,7 +659,7 @@
                                TextWrapping="Wrap"
                                FontSize="12"
                                Foreground="{StaticResource BrushTextPrimary}"
-                               Text="Mikrofonun Bluetooth (LK8353-53B3) yayını şu an algılanmadı. Mikrofon telefonunuza bağlıysa telefondan Bluetooth'u kapatın veya mikrofonun USB kablosunu 1 saniyeliğine çıkarıp tekrar takın; uygulama otomatik bağlanacaktır."/>
+                               Text="Mikrofonun Bluetooth (LK*) yayını şu an algılanmadı. Mikrofon telefonunuza bağlıysa telefondan Bluetooth'u kapatın veya mikrofonun USB kablosunu 1 saniyeliğine çıkarıp tekrar takın; uygulama otomatik bağlanacaktır."/>
                     <Button Grid.Column="2"
                             Content="Tekrar Dene"
                             Style="{StaticResource CreatorPrimaryButton}"

@@ -7,6 +7,12 @@
 *.userosscache
 *.sln.docstates
 
+## Local Backups & Scripts
+Backup_OriginalTheme/
+push_to_github.bat
+*.cfg
+*.env
+
 ## OS Files
 Thumbs.db
 Desktop.ini

@@ -51,12 +51,15 @@ public partial class MainWindow : Window
 
         LstProtocolLog.ItemsSource = _logEntries;
 
-        // Pre-populate known Godox EM68X address so the ComboBox is never empty
-        var defaultItem = new DeviceComboItem(
-            GodoxBleService.DefaultEm68XAddress,
-            "LK8353-53B3 (84:B4:DB:E9:53:B3)");
-        CmbDevices.Items.Add(defaultItem);
-        CmbDevices.SelectedItem = defaultItem;
+        // Load locally cached Godox EM68X address (stored in %LOCALAPPDATA%, never hardcoded in repo)
+        if (GodoxBleService.LoadCachedDevice() is var (cachedAddr, cachedName))
+        {
+            var defaultItem = new DeviceComboItem(
+                cachedAddr,
+                $"{cachedName} ({GodoxBleService.FormatMacAddress(cachedAddr)})");
+            CmbDevices.Items.Add(defaultItem);
+            CmbDevices.SelectedItem = defaultItem;
+        }
 
         _bleService.DeviceDiscovered += OnBleDeviceDiscovered;
         _bleService.ConnectionStateChanged += OnBleConnectionStateChanged;

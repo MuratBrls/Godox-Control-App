@@ -35,7 +35,48 @@ public sealed record ProtocolLogEntry(
 /// </summary>
 public sealed class GodoxBleService : IDisposable
 {
-    public const ulong DefaultEm68XAddress = 0x84B4DBE953B3UL; // LK8353-53B3
+    private static readonly string LocalCacheFilePath = System.IO.Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+        "GodoxEM68XStudio",
+        "last_device.cfg");
+
+    public static (ulong Address, string Name)? LoadCachedDevice()
+    {
+        try
+        {
+            if (System.IO.File.Exists(LocalCacheFilePath))
+            {
+                string content = System.IO.File.ReadAllText(LocalCacheFilePath).Trim();
+                string[] parts = content.Split('|');
+                if (parts.Length >= 1 &&
+                    ulong.TryParse(parts[0], System.Globalization.NumberStyles.HexNumber, null, out ulong addr) &&
+                    addr != 0)
+                {
+                    string name = parts.Length >= 2 && !string.IsNullOrWhiteSpace(parts[1])
+                        ? parts[1]
+                        : $"LK-{addr & 0xFFFF:X4}";
+                    return (addr, name);
+                }
+            }
+        }
+        catch { }
+        return null;
+    }
+
+    public static void SaveCachedDevice(ulong address, string name)
+    {
+        if (address == 0) return;
+        try
+        {
+            string? dir = System.IO.Path.GetDirectoryName(LocalCacheFilePath);
+            if (!string.IsNullOrEmpty(dir))
+            {
+                System.IO.Directory.CreateDirectory(dir);
+            }
+            System.IO.File.WriteAllText(LocalCacheFilePath, $"{address:X12}|{name}");
+        }
+        catch { }
+    }
 
     private BluetoothLEAdvertisementWatcher? _watcher;
     private BluetoothLEDevice? _device;
@@ -121,8 +162,9 @@ public sealed class GodoxBleService : IDisposable
             }
         }
 
+        var cached = LoadCachedDevice();
         bool hasQppUuid = args.Advertisement.ServiceUuids.Any(u => u == GodoxMicProtocol.QppServiceUuid);
-        bool isKnownGodoxAddress = args.BluetoothAddress == DefaultEm68XAddress ||
+        bool isKnownGodoxAddress = (cached.HasValue && args.BluetoothAddress == cached.Value.Address) ||
                                    _discovered.ContainsKey(args.BluetoothAddress);
         bool hasLkPrefix = localName.StartsWith(GodoxMicProtocol.DeviceNamePrefix, StringComparison.OrdinalIgnoreCase);
 
@@ -134,7 +176,7 @@ public sealed class GodoxBleService : IDisposable
         _discovered.TryGetValue(args.BluetoothAddress, out var existing);
         string effectiveName = !string.IsNullOrWhiteSpace(localName)
             ? localName
-            : (existing?.Name ?? (args.BluetoothAddress == DefaultEm68XAddress ? "LK8353-53B3" : $"LK-{args.BluetoothAddress & 0xFFFF:X4}"));
+            : (existing?.Name ?? (cached.HasValue && args.BluetoothAddress == cached.Value.Address ? cached.Value.Name : $"LK-{args.BluetoothAddress & 0xFFFF:X4}"));
 
         var dev = new DiscoveredBleDevice(
             args.BluetoothAddress,
@@ -144,6 +186,7 @@ public sealed class GodoxBleService : IDisposable
             DateTime.Now);
 
         _discovered[args.BluetoothAddress] = dev;
+        SaveCachedDevice(args.BluetoothAddress, effectiveName);
         DeviceDiscovered?.Invoke(dev);
     }
 
@@ -216,11 +259,21 @@ public sealed class GodoxBleService : IDisposable
 
             if (target is null)
             {
-                ulong fallbackAddr = targetAddress ?? DefaultEm68XAddress;
-                string fallbackName = fallbackAddr == DefaultEm68XAddress ? "LK8353-53B3" : $"LK-{fallbackAddr & 0xFFFF:X4}";
+                var cached = LoadCachedDevice();
+                ulong? fallbackAddr = targetAddress ?? cached?.Address;
+                if (!fallbackAddr.HasValue || fallbackAddr.Value == 0)
+                {
+                    ConnectionStateChanged?.Invoke(false, "Godox EM68X ('LK*') BLE yayını aranıyor...");
+                    StartScan();
+                    return false;
+                }
+
+                string fallbackName = cached.HasValue && fallbackAddr.Value == cached.Value.Address
+                    ? cached.Value.Name
+                    : $"LK-{fallbackAddr.Value & 0xFFFF:X4}";
                 target = new DiscoveredBleDevice(
-                    fallbackAddr,
-                    FormatMacAddress(fallbackAddr),
+                    fallbackAddr.Value,
+                    FormatMacAddress(fallbackAddr.Value),
                     fallbackName,
                     -35,
                     DateTime.Now);
@@ -333,6 +386,7 @@ public sealed class GodoxBleService : IDisposable
                 ? _device.Name
                 : target.Name;
             ConnectedDeviceAddress = target.AddressHex;
+            SaveCachedDevice(target.BluetoothAddress, ConnectedDeviceName);
 
             _connectionCts = new CancellationTokenSource();
             _ = Task.Run(() => RunTxWorkerAsync(_connectionCts.Token));
