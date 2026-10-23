@@ -210,6 +210,26 @@ public partial class MainWindow : Window
         Close();
     }
 
+    private void NavPage_Click(object sender, RoutedEventArgs e)
+    {
+        if (!_isUiInitialized || sender is not RadioButton rb) return;
+
+        string pageTag = rb.Tag?.ToString() ?? "Studio";
+
+        PageStudio.Visibility = pageTag == "Studio" ? Visibility.Visible : Visibility.Collapsed;
+        PageRgbLab.Visibility = pageTag == "RgbLab" ? Visibility.Visible : Visibility.Collapsed;
+        PageControls.Visibility = pageTag == "Controls" ? Visibility.Visible : Visibility.Collapsed;
+        PageDeviceLogs.Visibility = pageTag == "DeviceLogs" ? Visibility.Visible : Visibility.Collapsed;
+
+        TxtActivePageTitle.Text = pageTag switch
+        {
+            "RgbLab" => "RGB LAB // LED EFEKT & RENK STÜDYOSU",
+            "Controls" => "CONTROLS // DOKUNMATİK & HAREKET SENSÖRÜ",
+            "DeviceLogs" => "DEVICE & LOGS // BAĞLANTI & TANILAMA KONSOLU",
+            _ => "STUDIO // SES & KUTUP DESENİ"
+        };
+    }
+
     // ==================== USB AUDIO & BLE CONNECTION ====================
 
     private void UpdateUsbAudioStatus()
@@ -217,7 +237,7 @@ public partial class MainWindow : Window
         _audioService.RefreshEndpoints();
         if (_audioService.HasUsbCaptureEndpoint || _audioService.HasUsbRenderEndpoint)
         {
-            UsbStatusDot.Fill = new SolidColorBrush(Color.FromRgb(16, 185, 129));
+            UsbStatusDot.Fill = new SolidColorBrush(Color.FromRgb(145, 230, 75));
             TxtUsbStatus.Text = "USB Ses: EM68X Aktif";
             TxtUsbStatus.ToolTip = $"Kayıt: {_audioService.CaptureEndpointName}\nÇıkış: {_audioService.RenderEndpointName}";
 
@@ -247,7 +267,7 @@ public partial class MainWindow : Window
         }
         else
         {
-            UsbStatusDot.Fill = new SolidColorBrush(Color.FromRgb(100, 116, 139));
+            UsbStatusDot.Fill = new SolidColorBrush(Color.FromRgb(167, 173, 161));
             TxtUsbStatus.Text = "USB Ses: Bağlı Değil";
         }
     }
@@ -264,9 +284,9 @@ public partial class MainWindow : Window
 
         BarMicPeak.Foreground = peakPercent switch
         {
-            >= 85 => new SolidColorBrush(Color.FromRgb(239, 68, 68)),
-            >= 60 => new SolidColorBrush(Color.FromRgb(245, 158, 11)),
-            _ => new SolidColorBrush(Color.FromRgb(16, 185, 129))
+            >= 85 => new SolidColorBrush(Color.FromRgb(255, 48, 47)),
+            >= 60 => new SolidColorBrush(Color.FromRgb(255, 181, 46)),
+            _ => new SolidColorBrush(Color.FromRgb(145, 230, 75))
         };
     }
 
@@ -285,7 +305,7 @@ public partial class MainWindow : Window
         BtnConnect.IsEnabled = false;
         BtnResetBle.IsEnabled = false;
         TxtBleStatus.Text = "BLE Bağlanıyor...";
-        BleStatusDot.Fill = new SolidColorBrush(Color.FromRgb(245, 158, 11));
+        BleStatusDot.Fill = new SolidColorBrush(Color.FromRgb(255, 181, 46));
 
         try
         {
@@ -327,7 +347,7 @@ public partial class MainWindow : Window
         {
             if (connected)
             {
-                BleStatusDot.Fill = new SolidColorBrush(Color.FromRgb(16, 185, 129));
+                BleStatusDot.Fill = new SolidColorBrush(Color.FromRgb(145, 230, 75));
                 TxtBleStatus.Text = $"BLE: {_bleService.ConnectedDeviceName} Bağlı";
                 TxtBleStatus.ToolTip = statusMessage;
                 BtnConnect.Content = "Bağlı";
@@ -335,7 +355,7 @@ public partial class MainWindow : Window
             }
             else
             {
-                BleStatusDot.Fill = new SolidColorBrush(Color.FromRgb(245, 158, 11));
+                BleStatusDot.Fill = new SolidColorBrush(Color.FromRgb(255, 181, 46));
                 TxtBleStatus.Text = "BLE Bekleniyor...";
                 TxtBleStatus.ToolTip = statusMessage;
                 BtnConnect.Content = "Bağlan";
@@ -536,7 +556,7 @@ public partial class MainWindow : Window
             ? "7 Renk Otomatik Döngü"
             : colorName;
 
-        Color activeColor = _isLightPowerOn ? previewColor : Color.FromRgb(40, 48, 68);
+        Color activeColor = _isLightPowerOn ? previewColor : Color.FromRgb(41, 45, 38);
         BrushRgbPreview.Color = activeColor;
         BrushRgbGlow.Color = activeColor;
     }
@@ -585,7 +605,7 @@ public partial class MainWindow : Window
         BtnConnect.IsEnabled = false;
         BtnResetBle.IsEnabled = false;
         TxtBleStatus.Text = "BT Sıfırlanıyor...";
-        BleStatusDot.Fill = new SolidColorBrush(Color.FromRgb(245, 158, 11));
+        BleStatusDot.Fill = new SolidColorBrush(Color.FromRgb(255, 181, 46));
 
         try
         {

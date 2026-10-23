@@ -7,11 +7,11 @@
         mc:Ignorable="d"
         Title="Godox EM68X Studio"
         Icon="pack://application:,,,/godox_em68x.ico"
-        Width="1240" Height="830"
-        MinWidth="1080" MinHeight="740"
+        Width="1260" Height="820"
+        MinWidth="1100" MinHeight="740"
         WindowStartupLocation="CenterScreen"
-        Background="#080A0F"
-        Foreground="#F8FAFC"
+        Background="#070807"
+        Foreground="#F5F4EF"
         FontFamily="Segoe UI Variable Display, Segoe UI"
         UseLayoutRounding="True"
         SnapsToDevicePixels="True">
@@ -20,53 +20,53 @@
         <shell:WindowChrome CaptionHeight="0"
                             ResizeBorderThickness="6"
                             GlassFrameThickness="0"
-                            CornerRadius="16"
+                            CornerRadius="12"
                             UseAeroCaptionButtons="False"/>
     </shell:WindowChrome.WindowChrome>
 
     <Window.Resources>
-        <!-- ==================== BRUSHES & GRADIENTS ==================== -->
-        <LinearGradientBrush x:Key="PrimaryGradient" StartPoint="0,0" EndPoint="1,0">
-            <GradientStop Color="#6366F1" Offset="0.0"/>
-            <GradientStop Color="#8B5CF6" Offset="0.5"/>
-            <GradientStop Color="#06B6D4" Offset="1.0"/>
+        <!-- ==================== RGB CREATOR STUDIO DESIGN TOKENS ==================== -->
+        <SolidColorBrush x:Key="BrushBgCanvas" Color="#070807"/>
+        <SolidColorBrush x:Key="BrushBgSidebar" Color="#0B0C0B"/>
+        <SolidColorBrush x:Key="BrushBgSurface" Color="#101210"/>
+        <SolidColorBrush x:Key="BrushBgElevated" Color="#181B16"/>
+        <SolidColorBrush x:Key="BrushBgInteractive" Color="#181B16"/>
+        <SolidColorBrush x:Key="BrushBgInteractiveHover" Color="#22261F"/>
+        <SolidColorBrush x:Key="BrushBorderSubtle" Color="#242821"/>
+        <SolidColorBrush x:Key="BrushBorderHighlight" Color="#353A30"/>
+
+        <SolidColorBrush x:Key="BrushTextPrimary" Color="#F5F4EF"/>
+        <SolidColorBrush x:Key="BrushTextSecondary" Color="#A7ADA1"/>
+        <SolidColorBrush x:Key="BrushTextMuted" Color="#767C70"/>
+
+        <!-- Primary Orange, Lime Green, Cyan, Amber & Red Accents -->
+        <SolidColorBrush x:Key="BrushAccentViolet" Color="#FF572D"/>
+        <SolidColorBrush x:Key="BrushAccentCyan" Color="#24B9FF"/>
+        <SolidColorBrush x:Key="BrushStatusGreen" Color="#91E64B"/>
+        <SolidColorBrush x:Key="BrushStatusWarning" Color="#FFB52E"/>
+        <SolidColorBrush x:Key="BrushStatusError" Color="#FF302F"/>
+
+        <LinearGradientBrush x:Key="CreatorAccentGradient" StartPoint="0,0" EndPoint="1,0">
+            <GradientStop Color="#FF572D" Offset="0.0"/>
+            <GradientStop Color="#FFB52E" Offset="1.0"/>
         </LinearGradientBrush>
 
-        <LinearGradientBrush x:Key="MicSliderGradient" StartPoint="0,0" EndPoint="1,0">
-            <GradientStop Color="#4F46E5" Offset="0.0"/>
-            <GradientStop Color="#3B82F6" Offset="0.55"/>
-            <GradientStop Color="#06B6D4" Offset="1.0"/>
-        </LinearGradientBrush>
-
-        <LinearGradientBrush x:Key="MonitorSliderGradient" StartPoint="0,0" EndPoint="1,0">
-            <GradientStop Color="#059669" Offset="0.0"/>
-            <GradientStop Color="#10B981" Offset="0.6"/>
-            <GradientStop Color="#34D399" Offset="1.0"/>
-        </LinearGradientBrush>
-
-        <LinearGradientBrush x:Key="RgbSliderGradient" StartPoint="0,0" EndPoint="1,0">
-            <GradientStop Color="#EC4899" Offset="0.0"/>
-            <GradientStop Color="#8B5CF6" Offset="0.5"/>
-            <GradientStop Color="#38BDF8" Offset="1.0"/>
-        </LinearGradientBrush>
-
-        <LinearGradientBrush x:Key="CardSurfaceBrush" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#121621" Offset="0.0"/>
-            <GradientStop Color="#0E111A" Offset="1.0"/>
-        </LinearGradientBrush>
-
-        <!-- ==================== CARD STYLE ==================== -->
-        <Style x:Key="StudioCard" TargetType="Border">
-            <Setter Property="Background" Value="{StaticResource CardSurfaceBrush}"/>
-            <Setter Property="BorderBrush" Value="#1E2436"/>
+        <!-- ==================== STUDIO PANEL CONTAINER ==================== -->
+        <Style x:Key="CreatorPanel" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource BrushBgSurface}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BrushBorderSubtle}"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="CornerRadius" Value="10"/>
             <Setter Property="Padding" Value="22,18"/>
-            <Setter Property="Effect">
-                <Setter.Value>
-                    <DropShadowEffect Color="#000000" BlurRadius="24" ShadowDepth="6" Opacity="0.45"/>
-                </Setter.Value>
-            </Setter>
+        </Style>
+
+        <!-- ==================== TECHNICAL VALUE BADGE ==================== -->
+        <Style x:Key="TechValueBadge" TargetType="Border">
+            <Setter Property="Background" Value="#0A0B0A"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BrushBorderSubtle}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="10,4"/>
         </Style>
 
         <!-- ==================== WINDOW CAPTION BUTTONS ==================== -->
@@ -74,19 +74,19 @@
             <Setter Property="Width" Value="36"/>
             <Setter Property="Height" Value="30"/>
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="#94A3B8"/>
+            <Setter Property="Foreground" Value="{StaticResource BrushTextSecondary}"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="7">
+                        <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="6">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="bd" Property="Background" Value="#1E2536"/>
-                                <Setter Property="Foreground" Value="#F8FAFC"/>
+                                <Setter TargetName="bd" Property="Background" Value="{StaticResource BrushBgInteractive}"/>
+                                <Setter Property="Foreground" Value="{StaticResource BrushTextPrimary}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -98,13 +98,13 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="bd" Background="Transparent" CornerRadius="7">
+                        <Border x:Name="bd" Background="Transparent" CornerRadius="6">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="bd" Property="Background" Value="#EF4444"/>
-                                <Setter Property="Foreground" Value="#FFFFFF"/>
+                                <Setter TargetName="bd" Property="Background" Value="{StaticResource BrushStatusError}"/>
+                                <Setter Property="Foreground" Value="#F5F4EF"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -112,33 +112,84 @@
             </Setter>
         </Style>
 
-        <!-- ==================== MODERN PRIMARY & SECONDARY BUTTONS ==================== -->
-        <Style x:Key="PrimaryGlowButton" TargetType="Button">
-            <Setter Property="Foreground" Value="#FFFFFF"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="FontSize" Value="12.5"/>
-            <Setter Property="Padding" Value="16,8"/>
+        <!-- ==================== LEFT SIDEBAR NAVIGATION ITEM ==================== -->
+        <Style x:Key="SidebarNavButton" TargetType="RadioButton">
+            <Setter Property="Height" Value="48"/>
+            <Setter Property="Margin" Value="0,0,0,6"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource BrushTextSecondary}"/>
             <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Grid>
+                            <Border x:Name="bg"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="Transparent"
+                                    BorderThickness="1"
+                                    CornerRadius="8"
+                                    Padding="14,0"/>
+                            <Border x:Name="indicator"
+                                    Width="3"
+                                    Height="22"
+                                    CornerRadius="1.5"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Background="Transparent"/>
+                            <ContentPresenter HorizontalAlignment="Left"
+                                              VerticalAlignment="Center"
+                                              Margin="14,0,12,0"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bg" Property="Background" Value="#131612"/>
+                                <Setter Property="Foreground" Value="{StaticResource BrushTextPrimary}"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="bg" Property="Background" Value="#181B16"/>
+                                <Setter TargetName="bg" Property="BorderBrush" Value="#2A2F27"/>
+                                <Setter TargetName="indicator" Property="Background" Value="{StaticResource BrushAccentViolet}"/>
+                                <Setter Property="Foreground" Value="{StaticResource BrushTextPrimary}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ==================== PRIMARY & SECONDARY BUTTONS ==================== -->
+        <Style x:Key="CreatorPrimaryButton" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource BrushAccentViolet}"/>
+            <Setter Property="Foreground" Value="#F5F4EF"/>
+            <Setter Property="BorderBrush" Value="#FF724E"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Padding" Value="16,6"/>
+            <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border x:Name="border"
-                                Background="{StaticResource PrimaryGradient}"
-                                CornerRadius="10"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6"
                                 Padding="{TemplateBinding Padding}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="Opacity" Value="0.92"/>
+                                <Setter TargetName="border" Property="Background" Value="#FF6B45"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF8566"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="border" Property="Opacity" Value="0.80"/>
+                                <Setter TargetName="border" Property="Background" Value="#E04822"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="border" Property="Background" Value="#1E2436"/>
-                                <Setter Property="Foreground" Value="#64748B"/>
+                                <Setter TargetName="border" Property="Background" Value="#1B1E19"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="#353A30"/>
+                                <Setter Property="Foreground" Value="{StaticResource BrushTextMuted}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -146,13 +197,13 @@
             </Setter>
         </Style>
 
-        <Style x:Key="SoftPillButton" TargetType="Button">
-            <Setter Property="Background" Value="#171C2B"/>
-            <Setter Property="Foreground" Value="#CBD5E1"/>
-            <Setter Property="BorderBrush" Value="#262F45"/>
+        <Style x:Key="CreatorSecondaryButton" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource BrushBgInteractive}"/>
+            <Setter Property="Foreground" Value="{StaticResource BrushTextSecondary}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BrushBorderSubtle}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontSize" Value="11.5"/>
             <Setter Property="Padding" Value="12,6"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
@@ -162,18 +213,21 @@
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="9"
+                                CornerRadius="6"
                                 Padding="{TemplateBinding Padding}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="Background" Value="#21293E"/>
-                                <Setter TargetName="border" Property="BorderBrush" Value="#4F46E5"/>
-                                <Setter Property="Foreground" Value="#FFFFFF"/>
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource BrushBgInteractiveHover}"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource BrushBorderHighlight}"/>
+                                <Setter Property="Foreground" Value="{StaticResource BrushTextPrimary}"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="border" Property="Background" Value="#192032"/>
+                                <Setter TargetName="border" Property="Background" Value="#20241E"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.45"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -181,10 +235,10 @@
             </Setter>
         </Style>
 
-        <!-- ==================== MODERN TOGGLE SWITCH (CHECKBOX) ==================== -->
-        <Style x:Key="ModernToggleSwitch" TargetType="CheckBox">
-            <Setter Property="Foreground" Value="#E2E8F0"/>
-            <Setter Property="FontSize" Value="12.5"/>
+        <!-- ==================== PILL TOGGLE SWITCH ==================== -->
+        <Style x:Key="CreatorToggleSwitch" TargetType="CheckBox">
+            <Setter Property="Foreground" Value="{StaticResource BrushTextSecondary}"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="FontWeight" Value="Medium"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
@@ -192,15 +246,15 @@
                     <ControlTemplate TargetType="CheckBox">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <ContentPresenter VerticalAlignment="Center" Margin="0,0,10,0"/>
-                            <Grid Width="44" Height="24">
+                            <Grid Width="42" Height="22">
                                 <Border x:Name="track"
-                                        CornerRadius="12"
-                                        Background="#1B2132"
-                                        BorderBrush="#2E3852"
+                                        CornerRadius="11"
+                                        Background="#181B16"
+                                        BorderBrush="#2A2F27"
                                         BorderThickness="1"/>
                                 <Ellipse x:Name="thumb"
-                                         Width="18" Height="18"
-                                         Fill="#94A3B8"
+                                         Width="16" Height="16"
+                                         Fill="#A7ADA1"
                                          HorizontalAlignment="Left"
                                          VerticalAlignment="Center"
                                          Margin="3,0,0,0"/>
@@ -208,14 +262,15 @@
                         </StackPanel>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
-                                <Setter TargetName="track" Property="Background" Value="#4F46E5"/>
-                                <Setter TargetName="track" Property="BorderBrush" Value="#6366F1"/>
-                                <Setter TargetName="thumb" Property="Fill" Value="#FFFFFF"/>
+                                <Setter TargetName="track" Property="Background" Value="{StaticResource BrushStatusGreen}"/>
+                                <Setter TargetName="track" Property="BorderBrush" Value="{StaticResource BrushStatusGreen}"/>
+                                <Setter TargetName="thumb" Property="Fill" Value="#070807"/>
                                 <Setter TargetName="thumb" Property="HorizontalAlignment" Value="Right"/>
                                 <Setter TargetName="thumb" Property="Margin" Value="0,0,3,0"/>
+                                <Setter Property="Foreground" Value="{StaticResource BrushTextPrimary}"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="track" Property="BorderBrush" Value="#818CF8"/>
+                                <Setter TargetName="track" Property="BorderBrush" Value="#353A30"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -223,8 +278,8 @@
             </Setter>
         </Style>
 
-        <!-- ==================== MODERN DARK COMBOBOX ==================== -->
-        <ControlTemplate x:Key="ModernComboBoxToggleButton" TargetType="ToggleButton">
+        <!-- ==================== CREATOR COMBOBOX ==================== -->
+        <ControlTemplate x:Key="CreatorComboBoxToggleButton" TargetType="ToggleButton">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -232,38 +287,40 @@
                 </Grid.ColumnDefinitions>
                 <Border x:Name="Border"
                         Grid.ColumnSpan="2"
-                        CornerRadius="10"
-                        Background="#141826"
-                        BorderBrush="#262F45"
+                        CornerRadius="6"
+                        Background="{StaticResource BrushBgInteractive}"
+                        BorderBrush="{StaticResource BrushBorderSubtle}"
                         BorderThickness="1"/>
                 <Path x:Name="Arrow"
                       Grid.Column="1"
-                      Fill="#94A3B8"
+                      Fill="{StaticResource BrushTextSecondary}"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Center"
-                      Data="M 0 0 L 4.5 4.5 L 9 0 Z"/>
+                      Data="M 0 0 L 4 4 L 8 0 Z"/>
             </Grid>
             <ControlTemplate.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter TargetName="Border" Property="BorderBrush" Value="#4F46E5"/>
-                    <Setter TargetName="Arrow" Property="Fill" Value="#F8FAFC"/>
+                    <Setter TargetName="Border" Property="Background" Value="{StaticResource BrushBgInteractiveHover}"/>
+                    <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource BrushBorderHighlight}"/>
+                    <Setter TargetName="Arrow" Property="Fill" Value="{StaticResource BrushTextPrimary}"/>
                 </Trigger>
                 <Trigger Property="IsChecked" Value="True">
-                    <Setter TargetName="Border" Property="BorderBrush" Value="#6366F1"/>
+                    <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource BrushAccentViolet}"/>
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
 
-        <Style x:Key="ModernComboBox" TargetType="ComboBox">
-            <Setter Property="Foreground" Value="#F1F5F9"/>
-            <Setter Property="FontSize" Value="12.5"/>
-            <Setter Property="Height" Value="36"/>
+        <Style x:Key="CreatorComboBox" TargetType="ComboBox">
+            <Setter Property="Foreground" Value="{StaticResource BrushTextPrimary}"/>
+            <Setter Property="FontFamily" Value="Consolas, Segoe UI"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Height" Value="34"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ComboBox">
                         <Grid>
                             <ToggleButton Name="ToggleButton"
-                                          Template="{StaticResource ModernComboBoxToggleButton}"
+                                          Template="{StaticResource CreatorComboBoxToggleButton}"
                                           Focusable="False"
                                           IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                           ClickMode="Press"/>
@@ -280,19 +337,19 @@
                                    IsOpen="{TemplateBinding IsDropDownOpen}"
                                    AllowsTransparency="True"
                                    Focusable="False"
-                                   PopupAnimation="Slide">
+                                   PopupAnimation="Fade">
                                 <Grid Name="DropDown"
                                       SnapsToDevicePixels="True"
                                       MinWidth="{TemplateBinding ActualWidth}"
                                       MaxHeight="{TemplateBinding MaxDropDownHeight}"
                                       Margin="0,4,0,0">
                                     <Border x:Name="DropDownBorder"
-                                            Background="#141826"
+                                            Background="#101210"
                                             BorderThickness="1"
-                                            BorderBrush="#334155"
-                                            CornerRadius="10"
+                                            BorderBrush="#242821"
+                                            CornerRadius="6"
                                             Padding="4">
-                                        <ScrollViewer Margin="2" SnapsToDevicePixels="True">
+                                        <ScrollViewer Margin="1" SnapsToDevicePixels="True">
                                             <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained"/>
                                         </ScrollViewer>
                                     </Border>
@@ -305,23 +362,24 @@
             <Setter Property="ItemContainerStyle">
                 <Setter.Value>
                     <Style TargetType="ComboBoxItem">
-                        <Setter Property="Foreground" Value="#E2E8F0"/>
+                        <Setter Property="Foreground" Value="{StaticResource BrushTextPrimary}"/>
+                        <Setter Property="FontFamily" Value="Consolas, Segoe UI"/>
+                        <Setter Property="FontSize" Value="12"/>
                         <Setter Property="Padding" Value="10,7"/>
                         <Setter Property="Cursor" Value="Hand"/>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ComboBoxItem">
-                                    <Border x:Name="bd" Background="Transparent" CornerRadius="7" Padding="{TemplateBinding Padding}">
+                                    <Border x:Name="bd" Background="Transparent" CornerRadius="4" Padding="{TemplateBinding Padding}">
                                         <ContentPresenter/>
                                     </Border>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsHighlighted" Value="True">
-                                            <Setter TargetName="bd" Property="Background" Value="#252F48"/>
-                                            <Setter Property="Foreground" Value="#FFFFFF"/>
+                                            <Setter TargetName="bd" Property="Background" Value="{StaticResource BrushBgInteractiveHover}"/>
                                         </Trigger>
                                         <Trigger Property="IsSelected" Value="True">
-                                            <Setter TargetName="bd" Property="Background" Value="#312E81"/>
-                                            <Setter Property="Foreground" Value="#FFFFFF"/>
+                                            <Setter TargetName="bd" Property="Background" Value="#362720"/>
+                                            <Setter Property="Foreground" Value="#F5F4EF"/>
                                         </Trigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
@@ -332,33 +390,27 @@
             </Setter>
         </Style>
 
-        <!-- ==================== MODERN STUDIO FADER SLIDER ==================== -->
-        <Style x:Key="ModernSliderThumb" TargetType="Thumb">
-            <Setter Property="Width" Value="20"/>
-            <Setter Property="Height" Value="20"/>
+        <!-- ==================== SLIM STUDIO SLIDER WITH CIRCULAR THUMB ==================== -->
+        <Style x:Key="CreatorSliderThumb" TargetType="Thumb">
+            <Setter Property="Width" Value="16"/>
+            <Setter Property="Height" Value="16"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Thumb">
-                        <Grid>
-                            <Ellipse x:Name="outerGlow"
-                                     Width="20" Height="20"
-                                     Fill="#FFFFFF"
-                                     Stroke="#6366F1"
-                                     StrokeThickness="3">
-                                <Ellipse.Effect>
-                                    <DropShadowEffect Color="#6366F1" BlurRadius="10" ShadowDepth="0" Opacity="0.65"/>
-                                </Ellipse.Effect>
-                            </Ellipse>
-                        </Grid>
+                        <Ellipse x:Name="cap"
+                                 Width="16" Height="16"
+                                 Fill="#F5F4EF"
+                                 Stroke="#1B1E19"
+                                 StrokeThickness="2"/>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="outerGlow" Property="Width" Value="22"/>
-                                <Setter TargetName="outerGlow" Property="Height" Value="22"/>
-                                <Setter TargetName="outerGlow" Property="Stroke" Value="#38BDF8"/>
+                                <Setter TargetName="cap" Property="Fill" Value="#FFFFFF"/>
+                                <Setter TargetName="cap" Property="Stroke" Value="{StaticResource BrushAccentViolet}"/>
                             </Trigger>
                             <Trigger Property="IsDragging" Value="True">
-                                <Setter TargetName="outerGlow" Property="Stroke" Value="#06B6D4"/>
+                                <Setter TargetName="cap" Property="Fill" Value="#FFFFFF"/>
+                                <Setter TargetName="cap" Property="Stroke" Value="{StaticResource BrushAccentViolet}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -366,16 +418,16 @@
             </Setter>
         </Style>
 
-        <Style x:Key="ModernFaderSlider" TargetType="Slider">
-            <Setter Property="Height" Value="26"/>
-            <Setter Property="Background" Value="#1B2133"/>
-            <Setter Property="Foreground" Value="{StaticResource MicSliderGradient}"/>
+        <Style x:Key="CreatorSlider" TargetType="Slider">
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="Background" Value="#1A1D18"/>
+            <Setter Property="Foreground" Value="{StaticResource BrushAccentViolet}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Slider">
                         <Grid VerticalAlignment="Center">
-                            <Border Height="8"
-                                    CornerRadius="4"
+                            <Border Height="5"
+                                    CornerRadius="2.5"
                                     Background="{TemplateBinding Background}"
                                     VerticalAlignment="Center"/>
                             <Track x:Name="PART_Track" VerticalAlignment="Center">
@@ -383,8 +435,8 @@
                                     <RepeatButton Command="Slider.DecreaseLarge" Focusable="False" IsTabStop="False">
                                         <RepeatButton.Template>
                                             <ControlTemplate TargetType="RepeatButton">
-                                                <Border Height="8"
-                                                        CornerRadius="4"
+                                                <Border Height="5"
+                                                        CornerRadius="2.5"
                                                         Background="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Slider}}"/>
                                             </ControlTemplate>
                                         </RepeatButton.Template>
@@ -394,55 +446,19 @@
                                     <RepeatButton Command="Slider.IncreaseLarge" Focusable="False" IsTabStop="False">
                                         <RepeatButton.Template>
                                             <ControlTemplate TargetType="RepeatButton">
-                                                <Border Height="8" Background="Transparent"/>
+                                                <Border Height="5" Background="Transparent"/>
                                             </ControlTemplate>
                                         </RepeatButton.Template>
                                     </RepeatButton>
                                 </Track.IncreaseRepeatButton>
                                 <Track.Thumb>
-                                    <Thumb Style="{StaticResource ModernSliderThumb}"/>
+                                    <Thumb Style="{StaticResource CreatorSliderThumb}"/>
                                 </Track.Thumb>
                             </Track>
                         </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <!-- ==================== SELECTABLE STUDIO MODE CARD (RADIOBUTTON) ==================== -->
-        <Style x:Key="SelectableStudioCard" TargetType="RadioButton">
-            <Setter Property="Background" Value="#151926"/>
-            <Setter Property="Foreground" Value="#94A3B8"/>
-            <Setter Property="BorderBrush" Value="#232A3E"/>
-            <Setter Property="BorderThickness" Value="1.5"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Padding" Value="12,12"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="RadioButton">
-                        <Border x:Name="card"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="12"
-                                Padding="{TemplateBinding Padding}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="card" Property="Background" Value="#1B2133"/>
-                                <Setter TargetName="card" Property="BorderBrush" Value="#4F46E5"/>
-                                <Setter Property="Foreground" Value="#E2E8F0"/>
-                            </Trigger>
-                            <Trigger Property="IsChecked" Value="True">
-                                <Setter TargetName="card" Property="Background" Value="#1B1F3B"/>
-                                <Setter TargetName="card" Property="BorderBrush" Value="#6366F1"/>
-                                <Setter Property="Foreground" Value="#FFFFFF"/>
-                                <Setter TargetName="card" Property="Effect">
-                                    <Setter.Value>
-                                        <DropShadowEffect Color="#6366F1" BlurRadius="16" ShadowDepth="0" Opacity="0.28"/>
-                                    </Setter.Value>
-                                </Setter>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.4"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -450,38 +466,78 @@
             </Setter>
         </Style>
 
-        <!-- ==================== GLOWING COLOR SWATCH RADIOBUTTON ==================== -->
-        <Style x:Key="ColorSwatchRadio" TargetType="RadioButton">
+        <!-- ==================== MODE SELECTOR TILE (RADIOBUTTON) ==================== -->
+        <Style x:Key="CreatorModeTile" TargetType="RadioButton">
+            <Setter Property="Background" Value="#141713"/>
+            <Setter Property="Foreground" Value="{StaticResource BrushTextSecondary}"/>
+            <Setter Property="BorderBrush" Value="#1E221C"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Padding" Value="14,14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Grid>
+                            <Border x:Name="card"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="8"
+                                    Padding="{TemplateBinding Padding}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border x:Name="activeBar"
+                                    Width="24"
+                                    Height="2.5"
+                                    VerticalAlignment="Bottom"
+                                    Margin="0,0,0,4"
+                                    CornerRadius="1.2"
+                                    Background="Transparent"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="card" Property="Background" Value="#1B1F19"/>
+                                <Setter Property="Foreground" Value="{StaticResource BrushTextPrimary}"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="card" Property="Background" Value="#1D211B"/>
+                                <Setter TargetName="card" Property="BorderBrush" Value="#353A30"/>
+                                <Setter TargetName="activeBar" Property="Background" Value="{StaticResource BrushAccentViolet}"/>
+                                <Setter Property="Foreground" Value="{StaticResource BrushTextPrimary}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ==================== LED COLOR SWATCH RADIOBUTTON ==================== -->
+        <Style x:Key="CreatorColorSwatch" TargetType="RadioButton">
             <Setter Property="Width" Value="42"/>
             <Setter Property="Height" Value="42"/>
-            <Setter Property="Margin" Value="5,0"/>
+            <Setter Property="Margin" Value="6,0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RadioButton">
                         <Grid>
-                            <Ellipse x:Name="outerRing"
+                            <Ellipse x:Name="ring"
                                      Width="40" Height="40"
+                                     Fill="Transparent"
                                      Stroke="Transparent"
-                                     StrokeThickness="2.5"/>
+                                     StrokeThickness="2"/>
                             <Ellipse x:Name="swatch"
                                      Width="28" Height="28"
                                      Fill="{TemplateBinding Background}"
-                                     Stroke="#44FFFFFF"
-                                     StrokeThickness="1.2">
-                                <Ellipse.Effect>
-                                    <DropShadowEffect Color="#000000" BlurRadius="8" ShadowDepth="2" Opacity="0.5"/>
-                                </Ellipse.Effect>
-                            </Ellipse>
+                                     Stroke="#28FFFFFF"
+                                     StrokeThickness="1"/>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="outerRing" Property="Stroke" Value="#64748B"/>
-                                <Setter TargetName="swatch" Property="Width" Value="30"/>
-                                <Setter TargetName="swatch" Property="Height" Value="30"/>
+                                <Setter TargetName="ring" Property="Stroke" Value="#545C4D"/>
                             </Trigger>
                             <Trigger Property="IsChecked" Value="True">
-                                <Setter TargetName="outerRing" Property="Stroke" Value="#FFFFFF"/>
+                                <Setter TargetName="ring" Property="Stroke" Value="#F5F4EF"/>
                                 <Setter TargetName="swatch" Property="Width" Value="30"/>
                                 <Setter TargetName="swatch" Property="Height" Value="30"/>
                             </Trigger>
@@ -492,94 +548,80 @@
         </Style>
     </Window.Resources>
 
-    <!-- OUTER WINDOW BORDER -->
-    <Border Background="#080A0F" BorderBrush="#1F2537" BorderThickness="1" CornerRadius="16">
+    <!-- OUTER APPLICATION SHELL -->
+    <Border Background="{StaticResource BrushBgCanvas}" BorderBrush="{StaticResource BrushBorderSubtle}" BorderThickness="1" CornerRadius="12">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="64"/>
+                <RowDefinition Height="60"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <!-- ==================== 1. CUSTOM TOP TITLE & CONNECTION BAR ==================== -->
+            <!-- ==================== TOP PERSISTENT BAR: IDENTITY & LIVE CONNECTION TELEMETRY ==================== -->
             <Border Grid.Row="0"
-                    Background="#0C0F17"
-                    BorderBrush="#1A2030"
+                    Background="{StaticResource BrushBgSidebar}"
+                    BorderBrush="{StaticResource BrushBorderSubtle}"
                     BorderThickness="0,0,0,1"
-                    CornerRadius="16,16,0,0"
+                    CornerRadius="12,12,0,0"
                     Padding="20,0"
                     MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="220"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <!-- App Brand -->
+                    <!-- Brand Identity -->
                     <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
-                        <Border Width="38" Height="38" CornerRadius="11" Background="{StaticResource PrimaryGradient}" Margin="0,0,12,0">
+                        <Border Width="34" Height="34" CornerRadius="8" Background="#161915" BorderBrush="#242821" BorderThickness="1" Margin="0,0,12,0">
                             <Path Data="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z"
-                                  Fill="#FFFFFF" Stretch="Uniform" Width="18" Height="18"/>
+                                  Fill="{StaticResource BrushAccentViolet}" Stretch="Uniform" Width="16" Height="16"/>
                         </Border>
                         <StackPanel VerticalAlignment="Center">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="GODOX EM68X" FontSize="15.5" FontWeight="Bold" Foreground="#F8FAFC"/>
-                                <TextBlock Text=" STUDIO" FontSize="15.5" FontWeight="SemiBold" Foreground="#818CF8"/>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="GODOX" FontSize="14" FontWeight="Bold" Foreground="{StaticResource BrushTextPrimary}"/>
+                                <TextBlock Text=" EM68X" FontSize="14" FontWeight="Bold" Foreground="{StaticResource BrushAccentViolet}"/>
                             </StackPanel>
                             <TextBlock x:Name="TxtSubtitle"
-                                       Text="Pro Audio &amp; RGB Kontrol Merkezi"
-                                       FontSize="11.5" Foreground="#64748B"/>
+                                       Text="RGB Creator Studio"
+                                       FontSize="11" Foreground="{StaticResource BrushTextSecondary}"/>
                         </StackPanel>
                     </StackPanel>
 
-                    <!-- Center Status Pills -->
-                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <!-- Active Section Breadcrumb -->
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="14,0,0,0">
+                        <TextBlock x:Name="TxtActivePageTitle"
+                                   Text="STUDIO // SES &amp; KUTUP DESENİ"
+                                   FontSize="12"
+                                   FontFamily="Consolas, Segoe UI"
+                                   FontWeight="Bold"
+                                   Foreground="{StaticResource BrushTextSecondary}"/>
+                    </StackPanel>
+
+                    <!-- Persistent Real-Time Connection Pills -->
+                    <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,16,0">
                         <!-- BLE Status Pill -->
-                        <Border Background="#131724" BorderBrush="#232B3E" BorderThickness="1" CornerRadius="18" Padding="14,6" Margin="0,0,10,0">
+                        <Border Background="#111310" BorderBrush="{StaticResource BrushBorderSubtle}" BorderThickness="1" CornerRadius="6" Padding="12,6" Margin="0,0,8,0">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                <Ellipse x:Name="BleStatusDot" Width="9" Height="9" Fill="#F59E0B" Margin="0,0,8,0"/>
-                                <TextBlock x:Name="TxtBleStatus" Text="BLE Aranıyor..." FontSize="12" FontWeight="SemiBold" Foreground="#E2E8F0"/>
+                                <Ellipse x:Name="BleStatusDot" Width="8" Height="8" Fill="#FFB52E" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="TxtBleStatus" Text="BLE Aranıyor..." FontSize="11.5" FontWeight="SemiBold" Foreground="{StaticResource BrushTextPrimary}"/>
                             </StackPanel>
                         </Border>
 
-                        <!-- USB Status Pill -->
-                        <Border Background="#131724" BorderBrush="#232B3E" BorderThickness="1" CornerRadius="18" Padding="14,6">
+                        <!-- USB Audio Status Pill -->
+                        <Border Background="#111310" BorderBrush="{StaticResource BrushBorderSubtle}" BorderThickness="1" CornerRadius="6" Padding="12,6">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                <Ellipse x:Name="UsbStatusDot" Width="9" Height="9" Fill="#10B981" Margin="0,0,8,0"/>
-                                <TextBlock x:Name="TxtUsbStatus" Text="USB Ses: EM68X Aktif" FontSize="12" FontWeight="Medium" Foreground="#94A3B8"/>
+                                <Ellipse x:Name="UsbStatusDot" Width="8" Height="8" Fill="#91E64B" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="TxtUsbStatus" Text="USB Ses: EM68X Aktif" FontSize="11.5" FontWeight="Medium" Foreground="{StaticResource BrushTextSecondary}"/>
                             </StackPanel>
                         </Border>
                     </StackPanel>
 
-                    <!-- Device Selector & Action Buttons -->
-                    <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,14,0">
-                        <ComboBox x:Name="CmbDevices"
-                                  Style="{StaticResource ModernComboBox}"
-                                  Width="195"
-                                  Margin="0,0,8,0"
-                                  ToolTip="Keşfedilen Godox EM68X ('LK*') BLE Cihazları"/>
-                        <Button x:Name="BtnConnect"
-                                Content="Bağlan"
-                                Style="{StaticResource PrimaryGlowButton}"
-                                Margin="0,0,6,0"
-                                Click="BtnConnect_Click"/>
-                        <Button x:Name="BtnResetBle"
-                                Content="BT Sıfırla"
-                                Style="{StaticResource SoftPillButton}"
-                                Margin="0,0,6,0"
-                                ToolTip="Bilgisayarın Bluetooth adaptörünü yeniden başlatıp mikrofona bağlanır"
-                                Click="BtnResetBle_Click"/>
-                        <Button x:Name="BtnRefreshStatus"
-                                Content="Yenile"
-                                Style="{StaticResource SoftPillButton}"
-                                Click="BtnRefreshStatus_Click"/>
-                    </StackPanel>
-
-                    <!-- Custom Window Minimize / Maximize / Close Buttons -->
+                    <!-- Window Caption Controls -->
                     <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center">
-                        <Button Style="{StaticResource WindowControlButton}" Click="BtnMinimize_Click" ToolTip="Küçült">
+                        <Button Style="{StaticResource WindowControlButton}" Click="BtnMinimize_Click" ToolTip="Sistem Tepsisine Küçült">
                             <Path Data="M0,0 L10,0" Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" StrokeThickness="1.5"/>
                         </Button>
                         <Button Style="{StaticResource WindowControlButton}" Click="BtnMaximize_Click" ToolTip="Ekranı Kapla">
@@ -592,528 +634,809 @@
                 </Grid>
             </Border>
 
-            <!-- ==================== 2. HELPFUL BLE CONNECTION HINT BANNER ==================== -->
+            <!-- ==================== COLLAPSIBLE BLE CONNECTION HINT BANNER ==================== -->
             <Border x:Name="BannerBleHint"
                     Grid.Row="1"
                     Visibility="Collapsed"
-                    Background="#19162B"
-                    BorderBrush="#4F46E5"
+                    Background="#101210"
+                    BorderBrush="#FFB52E"
                     BorderThickness="1"
-                    CornerRadius="12"
-                    Margin="22,14,22,0"
-                    Padding="16,10">
+                    CornerRadius="8"
+                    Margin="20,12,20,0"
+                    Padding="14,9">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Border Grid.Column="0" Width="28" Height="28" CornerRadius="8" Background="#312E81" Margin="0,0,12,0" VerticalAlignment="Center">
-                        <TextBlock Text="!" FontSize="15" FontWeight="Bold" Foreground="#A5B4FC" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Border Grid.Column="0" Width="24" Height="24" CornerRadius="5" Background="#1A1D18" BorderBrush="#FFB52E" BorderThickness="1" Margin="0,0,12,0" VerticalAlignment="Center">
+                        <TextBlock Text="!" FontSize="12" FontFamily="Consolas" FontWeight="Bold" Foreground="#FFB52E" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                     <TextBlock x:Name="TxtBleHintMessage"
                                Grid.Column="1"
                                VerticalAlignment="Center"
                                TextWrapping="Wrap"
-                               FontSize="12.2"
-                               Foreground="#E2E8F0"
-                               Text="Mikrofonun Bluetooth (LK8353-53B3) yayını şu an algılanmadı. Mikrofon telefonunuza bağlıysa telefondan Bluetooth'u kapatın veya mikrofonun USB kablosunu 1 saniyeliğine çıkarıp tekrar takın; uygulama anında otomatik bağlanacaktır."/>
+                               FontSize="12"
+                               Foreground="{StaticResource BrushTextPrimary}"
+                               Text="Mikrofonun Bluetooth (LK8353-53B3) yayını şu an algılanmadı. Mikrofon telefonunuza bağlıysa telefondan Bluetooth'u kapatın veya mikrofonun USB kablosunu 1 saniyeliğine çıkarıp tekrar takın; uygulama otomatik bağlanacaktır."/>
                     <Button Grid.Column="2"
                             Content="Tekrar Dene"
-                            Style="{StaticResource PrimaryGlowButton}"
-                            Padding="14,6"
+                            Style="{StaticResource CreatorPrimaryButton}"
+                            Padding="14,5"
                             Margin="12,0,0,0"
                             Click="BtnConnect_Click"/>
                 </Grid>
             </Border>
 
-            <!-- ==================== 3. MAIN STUDIO WORKSPACE ==================== -->
-            <Grid Grid.Row="2" Margin="22,18,22,20">
+            <!-- ==================== MAIN BODY: PERSISTENT LEFT SIDEBAR + 4-PAGE WORKSPACE ==================== -->
+            <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1.05*"/>
-                    <ColumnDefinition Width="18"/>
-                    <ColumnDefinition Width="0.95*"/>
+                    <ColumnDefinition Width="236"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- ==================== LEFT COLUMN: AUDIO MIXER, POLAR PATTERN & SENSOR ==================== -->
-                <Grid Grid.Column="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="16"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="16"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+                <!-- ==================== PERSISTENT LEFT NAVIGATION SIDEBAR ==================== -->
+                <Border Grid.Column="0"
+                        Background="{StaticResource BrushBgSidebar}"
+                        BorderBrush="{StaticResource BrushBorderSubtle}"
+                        BorderThickness="0,0,1,0"
+                        CornerRadius="0,0,0,12"
+                        Padding="14,18">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-                    <!-- CARD 1: AUDIO & MONITOR MIXER -->
-                    <Border Grid.Row="0" Style="{StaticResource StudioCard}">
-                        <StackPanel>
-                            <!-- Card Header -->
-                            <Grid Margin="0,0,0,16">
-                                <StackPanel>
-                                    <TextBlock Text="SES &amp; MONİTÖR MİKSERİ" FontSize="13.5" FontWeight="Bold" Foreground="#F8FAFC"/>
-                                    <TextBlock Text="Mikrofon kazancı ve gecikmesiz kulaklık monitör seviyesi"
-                                               FontSize="11.5" Foreground="#64748B" Margin="0,2,0,0"/>
+                        <!-- Navigation Menu Items -->
+                        <StackPanel Grid.Row="0">
+                            <TextBlock Text="ÇALIŞMA ALANI"
+                                       FontSize="10.5"
+                                       FontFamily="Consolas, Segoe UI"
+                                       FontWeight="Bold"
+                                       Foreground="{StaticResource BrushTextMuted}"
+                                       Margin="10,0,0,10"/>
+
+                            <!-- 1. STUDIO -->
+                            <RadioButton x:Name="NavStudio"
+                                         GroupName="SidebarNavGroup"
+                                         Style="{StaticResource SidebarNavButton}"
+                                         IsChecked="True"
+                                         Tag="Studio"
+                                         Click="NavPage_Click">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Path Data="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z"
+                                          Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"
+                                          Stretch="Uniform" Width="15" Height="15" Margin="0,0,12,0"/>
+                                    <StackPanel>
+                                        <TextBlock Text="STUDIO" FontSize="12.5" FontWeight="Bold"/>
+                                        <TextBlock Text="Mikser &amp; Kutup Deseni" FontSize="10.5" Foreground="{StaticResource BrushTextMuted}"/>
+                                    </StackPanel>
                                 </StackPanel>
-                                <CheckBox x:Name="ChkSyncWindowsAudio"
-                                          Style="{StaticResource ModernToggleSwitch}"
-                                          Content="Windows Ses Eşitleme"
-                                          HorizontalAlignment="Right"
-                                          VerticalAlignment="Center"
-                                          IsChecked="True"
-                                          ToolTip="Mikrofon ve kulaklık seviyesini hem BLE DSP hem Windows USB Ses üzerinde senkronize eder"/>
-                            </Grid>
+                            </RadioButton>
 
-                            <!-- Live Input Peak Meter -->
-                            <Border Background="#0B0E16" BorderBrush="#1A2133" BorderThickness="1" CornerRadius="11" Padding="14,10" Margin="0,0,0,18">
+                            <!-- 2. RGB LAB -->
+                            <RadioButton x:Name="NavRgbLab"
+                                         GroupName="SidebarNavGroup"
+                                         Style="{StaticResource SidebarNavButton}"
+                                         Tag="RgbLab"
+                                         Click="NavPage_Click">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Path Data="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12C20,14.5 18.8,16.7 17,18.2C15.6,16.8 13.9,16 12,16C10.1,16 8.4,16.8 7,18.2C5.2,16.7 4,14.5 4,12A8,8 0 0,1 12,4Z"
+                                          Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"
+                                          Stretch="Uniform" Width="15" Height="15" Margin="0,0,12,0"/>
+                                    <StackPanel>
+                                        <TextBlock Text="RGB LAB" FontSize="12.5" FontWeight="Bold"/>
+                                        <TextBlock Text="LED Efekt &amp; Renk Stüdyosu" FontSize="10.5" Foreground="{StaticResource BrushTextMuted}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </RadioButton>
+
+                            <!-- 3. CONTROLS -->
+                            <RadioButton x:Name="NavControls"
+                                         GroupName="SidebarNavGroup"
+                                         Style="{StaticResource SidebarNavButton}"
+                                         Tag="Controls"
+                                         Click="NavPage_Click">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Path Data="M9,11.24V7.5C9,6.12 10.12,5 11.5,5C12.88,5 14,6.12 14,7.5V11.24C15.21,10.43 16,9.06 16,7.5C16,5.01 13.99,3 11.5,3C9.01,3 7,5.01 7,7.5C7,9.06 7.79,10.43 9,11.24M18.84,15.87L14.3,13.61C14.13,13.53 13.93,13.5 13.74,13.5H13V7.5C13,6.67 12.33,6 11.5,6C10.67,6 10,6.67 10,7.5V18.24L6.6,17.22L5.9,17.93L10.93,22.95C11.3,23.3 11.8,23.5 12.31,23.5H17.5C18.5,23.5 19.35,22.76 19.48,21.77L20.23,16.3C20.23,15.65 19.43,16.17 18.84,15.87Z"
+                                          Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"
+                                          Stretch="Uniform" Width="15" Height="15" Margin="0,0,12,0"/>
+                                    <StackPanel>
+                                        <TextBlock Text="CONTROLS" FontSize="12.5" FontWeight="Bold"/>
+                                        <TextBlock Text="Dokunmatik &amp; El Sensörü" FontSize="10.5" Foreground="{StaticResource BrushTextMuted}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </RadioButton>
+
+                            <!-- 4. DEVICE & LOGS -->
+                            <RadioButton x:Name="NavDeviceLogs"
+                                         GroupName="SidebarNavGroup"
+                                         Style="{StaticResource SidebarNavButton}"
+                                         Tag="DeviceLogs"
+                                         Click="NavPage_Click">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Path Data="M14.88,16.29L13,18.17V14.41M13,5.83L14.88,7.71L13,9.58M17.71,7.71L12,2H11V9.58L6.41,5L5,6.41L10.59,12L5,17.58L6.41,19L11,14.41V22H12L17.71,16.29L13.41,12L17.71,7.71Z"
+                                          Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"
+                                          Stretch="Uniform" Width="15" Height="15" Margin="0,0,12,0"/>
+                                    <StackPanel>
+                                        <TextBlock Text="DEVICE &amp; LOGS" FontSize="12.5" FontWeight="Bold"/>
+                                        <TextBlock Text="Bağlantı &amp; Canlı Konsol" FontSize="10.5" Foreground="{StaticResource BrushTextMuted}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </RadioButton>
+                        </StackPanel>
+
+                        <!-- Bottom Persistent Hardware Summary Card in Sidebar -->
+                        <Border Grid.Row="2"
+                                Background="#101210"
+                                BorderBrush="{StaticResource BrushBorderSubtle}"
+                                BorderThickness="1"
+                                CornerRadius="8"
+                                Padding="12,12">
+                            <StackPanel>
+                                <Grid Margin="0,0,0,8">
+                                    <TextBlock Text="AKTİF DONANIM ÖZETİ" FontSize="10" FontFamily="Consolas, Segoe UI" FontWeight="Bold" Foreground="{StaticResource BrushTextMuted}" VerticalAlignment="Center"/>
+                                    <Ellipse Width="8" Height="8" Fill="{Binding BorderBrush, ElementName=RingRgbPreview}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                </Grid>
+                                <Grid Margin="0,0,0,5">
+                                    <TextBlock Text="Kutup Deseni" FontSize="11.5" Foreground="{StaticResource BrushTextSecondary}"/>
+                                    <TextBlock Text="{Binding Text, ElementName=TxtActivePickupBadge}" FontSize="11.5" FontWeight="SemiBold" Foreground="{StaticResource BrushTextPrimary}" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <Grid Margin="0,0,0,5">
+                                    <TextBlock Text="Üst Sensör" FontSize="11.5" Foreground="{StaticResource BrushTextSecondary}"/>
+                                    <TextBlock Text="{Binding Text, ElementName=TxtActiveSensorBadge}" FontSize="11.5" FontWeight="SemiBold" Foreground="{StaticResource BrushTextPrimary}" HorizontalAlignment="Right"/>
+                                </Grid>
                                 <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="48"/>
-                                    </Grid.ColumnDefinitions>
-                                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,12,0">
-                                        <Ellipse Width="7" Height="7" Fill="#10B981" VerticalAlignment="Center" Margin="0,0,7,0"/>
-                                        <TextBlock Text="CANLI GİRİŞ (USB)" FontSize="11" FontWeight="Bold" Foreground="#94A3B8" VerticalAlignment="Center"/>
-                                    </StackPanel>
-                                    <ProgressBar x:Name="BarMicPeak"
-                                                 Grid.Column="1"
-                                                 Height="8"
-                                                 Minimum="0" Maximum="100" Value="0"
-                                                 Background="#161C2C"
-                                                 Foreground="#10B981"
-                                                 BorderThickness="0"/>
-                                    <TextBlock x:Name="TxtMicPeak"
-                                               Grid.Column="2"
-                                               Text="0%"
-                                               FontSize="12"
-                                               FontWeight="Bold"
-                                               Foreground="#10B981"
-                                               HorizontalAlignment="Right"
-                                               VerticalAlignment="Center"/>
+                                    <TextBlock Text="LED Rengi" FontSize="11.5" Foreground="{StaticResource BrushTextSecondary}"/>
+                                    <TextBlock Text="{Binding Text, ElementName=TxtSelectedColorName}" FontSize="11.5" FontWeight="SemiBold" Foreground="{StaticResource BrushTextPrimary}" HorizontalAlignment="Right"/>
                                 </Grid>
-                            </Border>
-
-                            <!-- Microphone Volume Fader -->
-                            <Grid Margin="0,0,0,8">
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                    <Border Width="28" Height="28" CornerRadius="8" Background="#1E2540" Margin="0,0,10,0">
-                                        <Path Data="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z"
-                                              Fill="#60A5FA" Stretch="Uniform" Width="14" Height="14"/>
-                                    </Border>
-                                    <TextBlock Text="Mikrofon Ses Seviyesi" FontSize="13.5" FontWeight="SemiBold" Foreground="#F1F5F9" VerticalAlignment="Center"/>
-                                </StackPanel>
-
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                                    <Button Content="25%" Style="{StaticResource SoftPillButton}" Padding="9,3" FontSize="11" Margin="0,0,4,0" Tag="25" Click="BtnMicPreset_Click"/>
-                                    <Button Content="50%" Style="{StaticResource SoftPillButton}" Padding="9,3" FontSize="11" Margin="0,0,4,0" Tag="50" Click="BtnMicPreset_Click"/>
-                                    <Button Content="75%" Style="{StaticResource SoftPillButton}" Padding="9,3" FontSize="11" Margin="0,0,4,0" Tag="75" Click="BtnMicPreset_Click"/>
-                                    <Button Content="100%" Style="{StaticResource SoftPillButton}" Padding="9,3" FontSize="11" Margin="0,0,10,0" Tag="100" Click="BtnMicPreset_Click"/>
-                                    <Border Background="#1B2548" BorderBrush="#3B82F6" BorderThickness="1" CornerRadius="8" Padding="10,3" MinWidth="56">
-                                        <TextBlock x:Name="TxtMicVolumeValue" Text="100%" FontSize="13" FontWeight="Bold" Foreground="#93C5FD" HorizontalAlignment="Center"/>
-                                    </Border>
-                                </StackPanel>
-                            </Grid>
-
-                            <Slider x:Name="SliderMicVolume"
-                                    Style="{StaticResource ModernFaderSlider}"
-                                    Foreground="{StaticResource MicSliderGradient}"
-                                    Minimum="0" Maximum="100" Value="100"
-                                    TickFrequency="1" IsSnapToTickEnabled="True"
-                                    Margin="0,0,0,18"
-                                    ValueChanged="SliderMicVolume_ValueChanged"
-                                    PreviewMouseLeftButtonDown="AudioSlider_PreviewMouseDown"
-                                    PreviewMouseLeftButtonUp="AudioSlider_PreviewMouseUp"/>
-
-                            <!-- Headphone Monitor Volume Fader -->
-                            <Grid Margin="0,0,0,8">
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                    <Border Width="28" Height="28" CornerRadius="8" Background="#0F2926" Margin="0,0,10,0">
-                                        <Path Data="M12,1C7,1 3,5 3,10V17A3,3 0 0,0 6,20H9V12H5V10A7,7 0 0,1 12,3A7,7 0 0,1 19,10V12H15V20H18A3,3 0 0,0 21,17V10C21,5 17,1 12,1Z"
-                                              Fill="#34D399" Stretch="Uniform" Width="14" Height="14"/>
-                                    </Border>
-                                    <TextBlock Text="Kulaklık Monitör Seviyesi" FontSize="13.5" FontWeight="SemiBold" Foreground="#F1F5F9" VerticalAlignment="Center"/>
-                                </StackPanel>
-
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                                    <Button Content="0%" Style="{StaticResource SoftPillButton}" Padding="9,3" FontSize="11" Margin="0,0,4,0" Tag="0" Click="BtnMonPreset_Click"/>
-                                    <Button Content="50%" Style="{StaticResource SoftPillButton}" Padding="9,3" FontSize="11" Margin="0,0,4,0" Tag="50" Click="BtnMonPreset_Click"/>
-                                    <Button Content="64%" Style="{StaticResource SoftPillButton}" Padding="9,3" FontSize="11" Margin="0,0,4,0" Tag="64" Click="BtnMonPreset_Click"/>
-                                    <Button Content="100%" Style="{StaticResource SoftPillButton}" Padding="9,3" FontSize="11" Margin="0,0,10,0" Tag="100" Click="BtnMonPreset_Click"/>
-                                    <Border Background="#0B2E27" BorderBrush="#10B981" BorderThickness="1" CornerRadius="8" Padding="10,3" MinWidth="56">
-                                        <TextBlock x:Name="TxtMonitorVolumeValue" Text="64%" FontSize="13" FontWeight="Bold" Foreground="#6EE7B7" HorizontalAlignment="Center"/>
-                                    </Border>
-                                </StackPanel>
-                            </Grid>
-
-                            <Slider x:Name="SliderMonitorVolume"
-                                    Style="{StaticResource ModernFaderSlider}"
-                                    Foreground="{StaticResource MonitorSliderGradient}"
-                                    Minimum="0" Maximum="100" Value="64"
-                                    TickFrequency="1" IsSnapToTickEnabled="True"
-                                    ValueChanged="SliderMonitorVolume_ValueChanged"
-                                    PreviewMouseLeftButtonDown="AudioSlider_PreviewMouseDown"
-                                    PreviewMouseLeftButtonUp="AudioSlider_PreviewMouseUp"/>
-                        </StackPanel>
-                    </Border>
-
-                    <!-- CARD 2: POLAR PATTERN (PICKUP MODE) -->
-                    <Border Grid.Row="2" Style="{StaticResource StudioCard}">
-                        <StackPanel>
-                            <Grid Margin="0,0,0,14">
-                                <StackPanel>
-                                    <TextBlock Text="SES ALMA MODU (KUTUP DESENİ)" FontSize="13.5" FontWeight="Bold" Foreground="#F8FAFC"/>
-                                    <TextBlock Text="Kayıt ortamınıza göre mikrofon kapsül yönlülüğünü seçin"
-                                               FontSize="11.5" Foreground="#64748B" Margin="0,2,0,0"/>
-                                </StackPanel>
-                                <Border Background="#1B2135" BorderBrush="#2D3753" BorderThickness="1" CornerRadius="8" Padding="10,4" HorizontalAlignment="Right" VerticalAlignment="Center">
-                                    <TextBlock x:Name="TxtActivePickupBadge" Text="Tüm Yönlü" FontSize="12" FontWeight="SemiBold" Foreground="#818CF8"/>
-                                </Border>
-                            </Grid>
-
-                            <UniformGrid Columns="4" Rows="1">
-                                <!-- Cardioid -->
-                                <RadioButton x:Name="RbPickupCardioid"
-                                             GroupName="PickupGroup"
-                                             Style="{StaticResource SelectableStudioCard}"
-                                             Margin="0,0,6,0"
-                                             Tag="Cardioid"
-                                             Click="PickupPattern_Click">
-                                    <StackPanel HorizontalAlignment="Center">
-                                        <Border Width="38" Height="38" CornerRadius="19" Background="#172036" Margin="0,0,0,8">
-                                            <Path Data="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
-                                                  Fill="#60A5FA" Stretch="Uniform" Width="17" Height="17"/>
-                                        </Border>
-                                        <TextBlock Text="Kardioid" FontSize="13" FontWeight="SemiBold" HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Tek Kişi / Ön" FontSize="11" Foreground="#64748B" HorizontalAlignment="Center" Margin="0,2,0,0"/>
-                                    </StackPanel>
-                                </RadioButton>
-
-                                <!-- Bidirectional -->
-                                <RadioButton x:Name="RbPickupBidirectional"
-                                             GroupName="PickupGroup"
-                                             Style="{StaticResource SelectableStudioCard}"
-                                             Margin="3,0,3,0"
-                                             Tag="Bidirectional"
-                                             Click="PickupPattern_Click">
-                                    <StackPanel HorizontalAlignment="Center">
-                                        <Border Width="38" Height="38" CornerRadius="19" Background="#201938" Margin="0,0,0,8">
-                                            <Path Data="M12,6A3,3 0 0,0 9,9A3,3 0 0,0 12,12A3,3 0 0,0 15,9A3,3 0 0,0 12,6M12,14A3,3 0 0,0 9,17A3,3 0 0,0 12,20A3,3 0 0,0 15,17A3,3 0 0,0 12,14M12,4A5,5 0 0,1 17,9C17,10.5 16.3,11.8 15.2,12.7C16.3,13.6 17,15 17,16.5A5,5 0 0,1 12,21.5A5,5 0 0,1 7,16.5C7,15 7.7,13.6 8.8,12.7C7.7,11.8 7,10.5 7,9A5,5 0 0,1 12,4Z"
-                                                  Fill="#A78BFA" Stretch="Uniform" Width="18" Height="18"/>
-                                        </Border>
-                                        <TextBlock Text="Çift Yönlü" FontSize="13" FontWeight="SemiBold" HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Karşılıklı / 2 Kişi" FontSize="11" Foreground="#64748B" HorizontalAlignment="Center" Margin="0,2,0,0"/>
-                                    </StackPanel>
-                                </RadioButton>
-
-                                <!-- Omnidirectional -->
-                                <RadioButton x:Name="RbPickupOmni"
-                                             GroupName="PickupGroup"
-                                             Style="{StaticResource SelectableStudioCard}"
-                                             Margin="3,0,3,0"
-                                             IsChecked="True"
-                                             Tag="Omnidirectional"
-                                             Click="PickupPattern_Click">
-                                    <StackPanel HorizontalAlignment="Center">
-                                        <Border Width="38" Height="38" CornerRadius="19" Background="#0F2926" Margin="0,0,0,8">
-                                            <Path Data="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7Z"
-                                                  Fill="#34D399" Stretch="Uniform" Width="18" Height="18"/>
-                                        </Border>
-                                        <TextBlock Text="Tüm Yönlü" FontSize="13" FontWeight="SemiBold" HorizontalAlignment="Center"/>
-                                        <TextBlock Text="360° Grup / Ortam" FontSize="11" Foreground="#64748B" HorizontalAlignment="Center" Margin="0,2,0,0"/>
-                                    </StackPanel>
-                                </RadioButton>
-
-                                <!-- Stereo -->
-                                <RadioButton x:Name="RbPickupStereo"
-                                             GroupName="PickupGroup"
-                                             Style="{StaticResource SelectableStudioCard}"
-                                             Margin="6,0,0,0"
-                                             Tag="Stereo"
-                                             Click="PickupPattern_Click">
-                                    <StackPanel HorizontalAlignment="Center">
-                                        <Border Width="38" Height="38" CornerRadius="19" Background="#2B162C" Margin="0,0,0,8">
-                                            <Path Data="M8,5A7,7 0 0,0 1,12A7,7 0 0,0 8,19A7,7 0 0,0 15,12A7,7 0 0,0 8,5M16,5A7,7 0 0,0 9,12A7,7 0 0,0 16,19A7,7 0 0,0 23,12A7,7 0 0,0 16,5Z"
-                                                  Fill="#F472B6" Stretch="Uniform" Width="19" Height="19"/>
-                                        </Border>
-                                        <TextBlock Text="Stereo" FontSize="13" FontWeight="SemiBold" HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Sol &amp; Sağ Kanal" FontSize="11" Foreground="#64748B" HorizontalAlignment="Center" Margin="0,2,0,0"/>
-                                    </StackPanel>
-                                </RadioButton>
-                            </UniformGrid>
-                        </StackPanel>
-                    </Border>
-
-                    <!-- CARD 3: TOP MUTE SENSOR CONTROL MODE -->
-                    <Border Grid.Row="4" Style="{StaticResource StudioCard}">
-                        <StackPanel VerticalAlignment="Center">
-                            <Grid Margin="0,0,0,14">
-                                <StackPanel>
-                                    <TextBlock Text="ÜST DOKUNMATİK &amp; EL SENSÖRÜ MODU" FontSize="13.5" FontWeight="Bold" Foreground="#F8FAFC"/>
-                                    <TextBlock Text="Mikrofonun üst kısmındaki sessize alma (mute) sensörü davranışı"
-                                               FontSize="11.5" Foreground="#64748B" Margin="0,2,0,0"/>
-                                </StackPanel>
-                                <Border Background="#1B2135" BorderBrush="#2D3753" BorderThickness="1" CornerRadius="8" Padding="10,4" HorizontalAlignment="Right" VerticalAlignment="Center">
-                                    <TextBlock x:Name="TxtActiveSensorBadge" Text="El Hareketi" FontSize="12" FontWeight="SemiBold" Foreground="#C084FC"/>
-                                </Border>
-                            </Grid>
-
-                            <UniformGrid Columns="4" Rows="1">
-                                <RadioButton x:Name="RbCtrlNoClose"
-                                             GroupName="SensorGroup"
-                                             Style="{StaticResource SelectableStudioCard}"
-                                             Margin="0,0,6,0"
-                                             Padding="10,12"
-                                             Tag="NoClose"
-                                             Click="SensorMode_Click">
-                                    <StackPanel HorizontalAlignment="Center">
-                                        <TextBlock Text="Sensör Kapalı" FontSize="12.5" FontWeight="SemiBold" HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Kilitli / Sürekli Açık" FontSize="10.5" Foreground="#64748B" HorizontalAlignment="Center" Margin="0,3,0,0"/>
-                                    </StackPanel>
-                                </RadioButton>
-
-                                <RadioButton x:Name="RbCtrlTouch"
-                                             GroupName="SensorGroup"
-                                             Style="{StaticResource SelectableStudioCard}"
-                                             Margin="3,0,3,0"
-                                             Padding="10,12"
-                                             Tag="Touch"
-                                             Click="SensorMode_Click">
-                                    <StackPanel HorizontalAlignment="Center">
-                                        <TextBlock Text="Dokunmatik" FontSize="12.5" FontWeight="SemiBold" HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Yalnızca Dokunma" FontSize="10.5" Foreground="#64748B" HorizontalAlignment="Center" Margin="0,3,0,0"/>
-                                    </StackPanel>
-                                </RadioButton>
-
-                                <RadioButton x:Name="RbCtrlHandSweep"
-                                             GroupName="SensorGroup"
-                                             Style="{StaticResource SelectableStudioCard}"
-                                             Margin="3,0,3,0"
-                                             Padding="10,12"
-                                             IsChecked="True"
-                                             Tag="HandSweep"
-                                             Click="SensorMode_Click">
-                                    <StackPanel HorizontalAlignment="Center">
-                                        <TextBlock Text="El Hareketi" FontSize="12.5" FontWeight="SemiBold" HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Temassız El Geçişi" FontSize="10.5" Foreground="#64748B" HorizontalAlignment="Center" Margin="0,3,0,0"/>
-                                    </StackPanel>
-                                </RadioButton>
-
-                                <RadioButton x:Name="RbCtrlAnyKey"
-                                             GroupName="SensorGroup"
-                                             Style="{StaticResource SelectableStudioCard}"
-                                             Margin="6,0,0,0"
-                                             Padding="10,12"
-                                             Tag="AnyKey"
-                                             Click="SensorMode_Click">
-                                    <StackPanel HorizontalAlignment="Center">
-                                        <TextBlock Text="Her İkisi" FontSize="12.5" FontWeight="SemiBold" HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Dokunma + El Geçişi" FontSize="10.5" Foreground="#64748B" HorizontalAlignment="Center" Margin="0,3,0,0"/>
-                                    </StackPanel>
-                                </RadioButton>
-                            </UniformGrid>
-                        </StackPanel>
-                    </Border>
-                </Grid>
-
-                <!-- ==================== RIGHT COLUMN: RGB LIGHTING STUDIO & PROTOCOL MONITOR ==================== -->
-                <Grid Grid.Column="2">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="16"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-
-                    <!-- CARD 1: RGB LIGHTING STUDIO -->
-                    <Border Grid.Row="0" Style="{StaticResource StudioCard}">
-                        <StackPanel>
-                            <!-- Header + Glowing RGB Preview Orb + Toggle Switch -->
-                            <Grid Margin="0,0,0,18">
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                    <Grid Width="42" Height="42" Margin="0,0,12,0">
-                                        <Ellipse Width="42" Height="42" Opacity="0.35">
-                                            <Ellipse.Fill>
-                                                <SolidColorBrush x:Name="BrushRgbGlow" Color="#FF00FF"/>
-                                            </Ellipse.Fill>
-                                            <Ellipse.Effect>
-                                                <BlurEffect Radius="14"/>
-                                            </Ellipse.Effect>
-                                        </Ellipse>
-                                        <Border Width="32" Height="32" CornerRadius="16" BorderBrush="#55FFFFFF" BorderThickness="1.5">
-                                            <Border.Background>
-                                                <SolidColorBrush x:Name="BrushRgbPreview" Color="#FF00FF"/>
-                                            </Border.Background>
-                                        </Border>
-                                    </Grid>
-                                    <StackPanel VerticalAlignment="Center">
-                                        <TextBlock Text="RGB AYDINLATMA STÜDYOSU" FontSize="13.5" FontWeight="Bold" Foreground="#F8FAFC"/>
-                                        <TextBlock Text="Mikrofon gövdesi ambiyans efektleri, renk ve parlaklık"
-                                                   FontSize="11.5" Foreground="#64748B" Margin="0,2,0,0"/>
-                                    </StackPanel>
-                                </StackPanel>
-
-                                <CheckBox x:Name="ChkRgbPower"
-                                          Style="{StaticResource ModernToggleSwitch}"
-                                          Content="RGB Aydınlatma"
-                                          IsChecked="True"
-                                          HorizontalAlignment="Right"
-                                          VerticalAlignment="Center"
-                                          Click="ChkRgbPower_Click"/>
-                            </Grid>
-
-                            <!-- 5 RGB Effect Modes -->
-                            <TextBlock Text="AYDINLATMA EFEKTİ" FontSize="11" FontWeight="Bold" Foreground="#64748B" Margin="0,0,0,8"/>
-                            <UniformGrid Columns="5" Rows="1" Margin="0,0,0,18">
-                                <RadioButton x:Name="RbModeMonochrome"
-                                             GroupName="RgbModeGroup"
-                                             Style="{StaticResource SelectableStudioCard}"
-                                             Margin="0,0,4,0" Padding="6,11"
-                                             IsChecked="True"
-                                             Tag="Monochrome"
-                                             Click="RgbMode_Click">
-                                    <StackPanel HorizontalAlignment="Center">
-                                        <TextBlock Text="Sabit" FontSize="12.5" FontWeight="SemiBold" HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Tek Renk" FontSize="10" Foreground="#64748B" HorizontalAlignment="Center" Margin="0,2,0,0"/>
-                                    </StackPanel>
-                                </RadioButton>
-
-                                <RadioButton x:Name="RbModeBreathing"
-                                             GroupName="RgbModeGroup"
-                                             Style="{StaticResource SelectableStudioCard}"
-                                             Margin="2,0,2,0" Padding="6,11"
-                                             Tag="Breathing"
-                                             Click="RgbMode_Click">
-                                    <StackPanel HorizontalAlignment="Center">
-                                        <TextBlock Text="Nefes" FontSize="12.5" FontWeight="SemiBold" HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Yumuşak" FontSize="10" Foreground="#64748B" HorizontalAlignment="Center" Margin="0,2,0,0"/>
-                                    </StackPanel>
-                                </RadioButton>
-
-                                <RadioButton x:Name="RbModeGradient"
-                                             GroupName="RgbModeGroup"
-                                             Style="{StaticResource SelectableStudioCard}"
-                                             Margin="2,0,2,0" Padding="6,11"
-                                             Tag="Gradient"
-                                             Click="RgbMode_Click">
-                                    <StackPanel HorizontalAlignment="Center">
-                                        <TextBlock Text="Geçişli" FontSize="12.5" FontWeight="SemiBold" HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Gradyan" FontSize="10" Foreground="#64748B" HorizontalAlignment="Center" Margin="0,2,0,0"/>
-                                    </StackPanel>
-                                </RadioButton>
-
-                                <RadioButton x:Name="RbModeLoop"
-                                             GroupName="RgbModeGroup"
-                                             Style="{StaticResource SelectableStudioCard}"
-                                             Margin="2,0,2,0" Padding="6,11"
-                                             Tag="RgbLoop"
-                                             Click="RgbMode_Click">
-                                    <StackPanel HorizontalAlignment="Center">
-                                        <TextBlock Text="7 Renk" FontSize="12.5" FontWeight="SemiBold" HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Döngü" FontSize="10" Foreground="#64748B" HorizontalAlignment="Center" Margin="0,2,0,0"/>
-                                    </StackPanel>
-                                </RadioButton>
-
-                                <RadioButton x:Name="RbModeSound"
-                                             GroupName="RgbModeGroup"
-                                             Style="{StaticResource SelectableStudioCard}"
-                                             Margin="4,0,0,0" Padding="6,11"
-                                             Tag="SoundEffect"
-                                             Click="RgbMode_Click">
-                                    <StackPanel HorizontalAlignment="Center">
-                                        <TextBlock Text="Müzik" FontSize="12.5" FontWeight="SemiBold" HorizontalAlignment="Center"/>
-                                        <TextBlock Text="Sese Duyarlı" FontSize="10" Foreground="#64748B" HorizontalAlignment="Center" Margin="0,2,0,0"/>
-                                    </StackPanel>
-                                </RadioButton>
-                            </UniformGrid>
-
-                            <!-- 7 Color Swatches -->
-                            <StackPanel x:Name="PanelColorSwatches" Margin="0,0,0,18">
-                                <Grid Margin="0,0,0,10">
-                                    <TextBlock Text="RENK PALETİ" FontSize="11" FontWeight="Bold" Foreground="#64748B" VerticalAlignment="Center"/>
-                                    <TextBlock x:Name="TxtSelectedColorName" Text="Magenta" FontSize="12" FontWeight="SemiBold" Foreground="#F472B6" HorizontalAlignment="Right"/>
-                                </Grid>
-                                <Border Background="#0B0E16" BorderBrush="#1A2133" BorderThickness="1" CornerRadius="12" Padding="10,8">
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <RadioButton x:Name="RbColorRed" GroupName="RgbColorGroup" Style="{StaticResource ColorSwatchRadio}" Background="#FF2A2A" Tag="Red" ToolTip="Kırmızı" Click="RgbColor_Click"/>
-                                        <RadioButton x:Name="RbColorMagenta" GroupName="RgbColorGroup" Style="{StaticResource ColorSwatchRadio}" Background="#F000FF" Tag="Magenta" IsChecked="True" ToolTip="Magenta" Click="RgbColor_Click"/>
-                                        <RadioButton x:Name="RbColorBlue" GroupName="RgbColorGroup" Style="{StaticResource ColorSwatchRadio}" Background="#2563EB" Tag="Blue" ToolTip="Mavi" Click="RgbColor_Click"/>
-                                        <RadioButton x:Name="RbColorCyan" GroupName="RgbColorGroup" Style="{StaticResource ColorSwatchRadio}" Background="#00F0FF" Tag="Cyan" ToolTip="Camgöbeği" Click="RgbColor_Click"/>
-                                        <RadioButton x:Name="RbColorGreen" GroupName="RgbColorGroup" Style="{StaticResource ColorSwatchRadio}" Background="#10B981" Tag="Green" ToolTip="Yeşil" Click="RgbColor_Click"/>
-                                        <RadioButton x:Name="RbColorYellow" GroupName="RgbColorGroup" Style="{StaticResource ColorSwatchRadio}" Background="#FACC15" Tag="Yellow" ToolTip="Sarı" Click="RgbColor_Click"/>
-                                        <RadioButton x:Name="RbColorWhite" GroupName="RgbColorGroup" Style="{StaticResource ColorSwatchRadio}" Background="#FFFFFF" Tag="White" ToolTip="Beyaz / Geçişli Modda Turuncu" Click="RgbColor_Click"/>
-                                    </StackPanel>
-                                </Border>
                             </StackPanel>
+                        </Border>
+                    </Grid>
+                </Border>
 
-                            <!-- Brightness Slider -->
-                            <Grid Margin="0,0,0,6">
-                                <TextBlock Text="Işık Parlaklığı" FontSize="13" FontWeight="SemiBold" Foreground="#F1F5F9"/>
-                                <TextBlock x:Name="TxtBrightnessValue" Text="100%" FontSize="13" FontWeight="Bold" Foreground="#FBBF24" HorizontalAlignment="Right"/>
-                            </Grid>
-                            <Slider x:Name="SliderBrightness"
-                                    Style="{StaticResource ModernFaderSlider}"
-                                    Foreground="{StaticResource RgbSliderGradient}"
-                                    Minimum="0" Maximum="100" Value="100"
-                                    TickFrequency="1" IsSnapToTickEnabled="True"
-                                    Margin="0,0,0,14"
-                                    ValueChanged="SliderBrightness_ValueChanged"
-                                    PreviewMouseLeftButtonDown="RgbSlider_PreviewMouseDown"
-                                    PreviewMouseLeftButtonUp="RgbSlider_PreviewMouseUp"/>
+                <!-- ==================== RIGHT MULTI-PAGE WORKSPACE ==================== -->
+                <Grid Grid.Column="1" Margin="24,20,24,22">
 
-                            <!-- Speed Slider -->
-                            <StackPanel x:Name="PanelSpeedControl">
-                                <Grid Margin="0,0,0,6">
-                                    <TextBlock Text="Animasyon Hızı" FontSize="13" FontWeight="SemiBold" Foreground="#F1F5F9"/>
-                                    <TextBlock x:Name="TxtSpeedValue" Text="100%" FontSize="13" FontWeight="Bold" Foreground="#38BDF8" HorizontalAlignment="Right"/>
+                    <!-- ========================================================================= -->
+                    <!-- PAGE 1: STUDIO (MICROPHONE GAIN, HEADPHONE MONITOR, USB METER, PATTERNS) -->
+                    <!-- ========================================================================= -->
+                    <Grid x:Name="PageStudio" Visibility="Visible">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="18"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- STUDIO MIXER PANEL -->
+                        <Border Grid.Row="0" Style="{StaticResource CreatorPanel}">
+                            <StackPanel>
+                                <!-- Header + Windows Sync Toggle -->
+                                <Grid Margin="0,0,0,18">
+                                    <StackPanel>
+                                        <TextBlock Text="STÜDYO SES &amp; MONİTÖR MİKSERİ" FontSize="14" FontWeight="Bold" Foreground="{StaticResource BrushTextPrimary}"/>
+                                        <TextBlock Text="Gerçek zamanlı mikrofon kazancı (Gain), USB giriş seviyesi ve gecikmesiz kulaklık monitör kontrolü"
+                                                   FontSize="11.5" Foreground="{StaticResource BrushTextSecondary}" Margin="0,3,0,0"/>
+                                    </StackPanel>
+                                    <CheckBox x:Name="ChkSyncWindowsAudio"
+                                              Style="{StaticResource CreatorToggleSwitch}"
+                                              Content="Windows Ses Eşitleme"
+                                              HorizontalAlignment="Right"
+                                              VerticalAlignment="Center"
+                                              IsChecked="True"
+                                              ToolTip="Mikrofon ve kulaklık seviyesini hem BLE donanımı hem Windows USB Ses üzerinde senkronize eder"/>
                                 </Grid>
-                                <Slider x:Name="SliderSpeed"
-                                        Style="{StaticResource ModernFaderSlider}"
-                                        Foreground="{StaticResource PrimaryGradient}"
-                                        Minimum="1" Maximum="100" Value="100"
+
+                                <!-- Live USB Input Peak Meter -->
+                                <Border Background="#0A0B0A" BorderBrush="{StaticResource BrushBorderSubtle}" BorderThickness="1" CornerRadius="8" Padding="14,11" Margin="0,0,0,20">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="52"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,14,0">
+                                            <Ellipse Width="7" Height="7" Fill="#91E64B" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                            <TextBlock Text="CANLI GİRİŞ SEVİYESİ (USB)" FontSize="11" FontFamily="Consolas, Segoe UI" FontWeight="Bold" Foreground="{StaticResource BrushTextSecondary}" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                        <ProgressBar x:Name="BarMicPeak"
+                                                     Grid.Column="1"
+                                                     Height="7"
+                                                     Minimum="0" Maximum="100" Value="0"
+                                                     Background="#181B16"
+                                                     Foreground="#91E64B"
+                                                     BorderThickness="0"/>
+                                        <TextBlock x:Name="TxtMicPeak"
+                                                   Grid.Column="2"
+                                                   Text="0%"
+                                                   FontSize="12"
+                                                   FontFamily="Consolas"
+                                                   FontWeight="Bold"
+                                                   Foreground="{StaticResource BrushTextPrimary}"
+                                                   HorizontalAlignment="Right"
+                                                   VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+
+                                <!-- Microphone Gain Fader -->
+                                <Grid Margin="0,0,0,8">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Border Width="28" Height="28" CornerRadius="6" Background="#181B16" Margin="0,0,10,0">
+                                            <Path Data="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z"
+                                                  Fill="{StaticResource BrushAccentViolet}" Stretch="Uniform" Width="13" Height="13"/>
+                                        </Border>
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock Text="Mikrofon Ses Seviyesi (Gain)" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource BrushTextPrimary}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                        <Button Content="25%" Style="{StaticResource CreatorSecondaryButton}" Padding="9,3" FontSize="11" Margin="0,0,4,0" Tag="25" Click="BtnMicPreset_Click"/>
+                                        <Button Content="50%" Style="{StaticResource CreatorSecondaryButton}" Padding="9,3" FontSize="11" Margin="0,0,4,0" Tag="50" Click="BtnMicPreset_Click"/>
+                                        <Button Content="75%" Style="{StaticResource CreatorSecondaryButton}" Padding="9,3" FontSize="11" Margin="0,0,4,0" Tag="75" Click="BtnMicPreset_Click"/>
+                                        <Button Content="100%" Style="{StaticResource CreatorSecondaryButton}" Padding="9,3" FontSize="11" Margin="0,0,10,0" Tag="100" Click="BtnMicPreset_Click"/>
+                                        <Border Style="{StaticResource TechValueBadge}" MinWidth="54">
+                                            <TextBlock x:Name="TxtMicVolumeValue" Text="100%" FontSize="12.5" FontFamily="Consolas" FontWeight="Bold" Foreground="{StaticResource BrushAccentViolet}" HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </StackPanel>
+                                </Grid>
+
+                                <Slider x:Name="SliderMicVolume"
+                                        Style="{StaticResource CreatorSlider}"
+                                        Foreground="{StaticResource BrushAccentViolet}"
+                                        Minimum="0" Maximum="100" Value="100"
                                         TickFrequency="1" IsSnapToTickEnabled="True"
-                                        ValueChanged="SliderSpeed_ValueChanged"
+                                        Margin="0,0,0,20"
+                                        ValueChanged="SliderMicVolume_ValueChanged"
+                                        PreviewMouseLeftButtonDown="AudioSlider_PreviewMouseDown"
+                                        PreviewMouseLeftButtonUp="AudioSlider_PreviewMouseUp"/>
+
+                                <!-- Headphone Monitor Fader -->
+                                <Grid Margin="0,0,0,8">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Border Width="28" Height="28" CornerRadius="6" Background="#181B16" Margin="0,0,10,0">
+                                            <Path Data="M12,1C7,1 3,5 3,10V17A3,3 0 0,0 6,20H9V12H5V10A7,7 0 0,1 12,3A7,7 0 0,1 19,10V12H15V20H18A3,3 0 0,0 21,17V10C21,5 17,1 12,1Z"
+                                                  Fill="{StaticResource BrushAccentCyan}" Stretch="Uniform" Width="13" Height="13"/>
+                                        </Border>
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock Text="Kulaklık Monitör Seviyesi" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource BrushTextPrimary}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                        <Button Content="0%" Style="{StaticResource CreatorSecondaryButton}" Padding="9,3" FontSize="11" Margin="0,0,4,0" Tag="0" Click="BtnMonPreset_Click"/>
+                                        <Button Content="50%" Style="{StaticResource CreatorSecondaryButton}" Padding="9,3" FontSize="11" Margin="0,0,4,0" Tag="50" Click="BtnMonPreset_Click"/>
+                                        <Button Content="64%" Style="{StaticResource CreatorSecondaryButton}" Padding="9,3" FontSize="11" Margin="0,0,4,0" Tag="64" Click="BtnMonPreset_Click"/>
+                                        <Button Content="100%" Style="{StaticResource CreatorSecondaryButton}" Padding="9,3" FontSize="11" Margin="0,0,10,0" Tag="100" Click="BtnMonPreset_Click"/>
+                                        <Border Style="{StaticResource TechValueBadge}" MinWidth="54">
+                                            <TextBlock x:Name="TxtMonitorVolumeValue" Text="64%" FontSize="12.5" FontFamily="Consolas" FontWeight="Bold" Foreground="{StaticResource BrushAccentCyan}" HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </StackPanel>
+                                </Grid>
+
+                                <Slider x:Name="SliderMonitorVolume"
+                                        Style="{StaticResource CreatorSlider}"
+                                        Foreground="{StaticResource BrushAccentCyan}"
+                                        Minimum="0" Maximum="100" Value="64"
+                                        TickFrequency="1" IsSnapToTickEnabled="True"
+                                        ValueChanged="SliderMonitorVolume_ValueChanged"
+                                        PreviewMouseLeftButtonDown="AudioSlider_PreviewMouseDown"
+                                        PreviewMouseLeftButtonUp="AudioSlider_PreviewMouseUp"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- POLAR PICKUP PATTERNS PANEL -->
+                        <Border Grid.Row="2" Style="{StaticResource CreatorPanel}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="18"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0">
+                                    <StackPanel>
+                                        <TextBlock Text="KUTUP DESENİ (POLAR PICKUP PATTERN)" FontSize="14" FontWeight="Bold" Foreground="{StaticResource BrushTextPrimary}"/>
+                                        <TextBlock Text="Kayıt senaryonuza göre mikrofon kapsülünün ses alma yönlülüğünü seçin"
+                                                   FontSize="11.5" Foreground="{StaticResource BrushTextSecondary}" Margin="0,3,0,0"/>
+                                    </StackPanel>
+                                    <Border Style="{StaticResource TechValueBadge}" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                        <TextBlock x:Name="TxtActivePickupBadge" Text="Tüm Yönlü" FontSize="12" FontFamily="Consolas, Segoe UI" FontWeight="Bold" Foreground="{StaticResource BrushAccentViolet}"/>
+                                    </Border>
+                                </Grid>
+
+                                <UniformGrid Grid.Row="2" Columns="4" Rows="1">
+                                    <!-- Cardioid -->
+                                    <RadioButton x:Name="RbPickupCardioid"
+                                                 GroupName="PickupGroup"
+                                                 Style="{StaticResource CreatorModeTile}"
+                                                 Margin="0,0,8,0"
+                                                 Tag="Cardioid"
+                                                 Click="PickupPattern_Click">
+                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Border Width="48" Height="48" CornerRadius="24" Background="#0B0C0B" Margin="0,0,0,12">
+                                                <Path Data="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
+                                                      Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" Stretch="Uniform" Width="20" Height="20"/>
+                                            </Border>
+                                            <TextBlock Text="Kardioid" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="Tek Kişi / Ön Odaklı" FontSize="11.5" Foreground="{StaticResource BrushTextSecondary}" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                                            <TextBlock Text="Yayın, Vokal &amp; Oyun" FontSize="10.5" Foreground="{StaticResource BrushTextMuted}" HorizontalAlignment="Center" Margin="0,2,0,0"/>
+                                        </StackPanel>
+                                    </RadioButton>
+
+                                    <!-- Bidirectional -->
+                                    <RadioButton x:Name="RbPickupBidirectional"
+                                                 GroupName="PickupGroup"
+                                                 Style="{StaticResource CreatorModeTile}"
+                                                 Margin="4,0,4,0"
+                                                 Tag="Bidirectional"
+                                                 Click="PickupPattern_Click">
+                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Border Width="48" Height="48" CornerRadius="24" Background="#0B0C0B" Margin="0,0,0,12">
+                                                <Path Data="M12,6A3,3 0 0,0 9,9A3,3 0 0,0 12,12A3,3 0 0,0 15,9A3,3 0 0,0 12,6M12,14A3,3 0 0,0 9,17A3,3 0 0,0 12,20A3,3 0 0,0 15,17A3,3 0 0,0 12,14M12,4A5,5 0 0,1 17,9C17,10.5 16.3,11.8 15.2,12.7C16.3,13.6 17,15 17,16.5A5,5 0 0,1 12,21.5A5,5 0 0,1 7,16.5C7,15 7.7,13.6 8.8,12.7C7.7,11.8 7,10.5 7,9A5,5 0 0,1 12,4Z"
+                                                      Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" Stretch="Uniform" Width="21" Height="21"/>
+                                            </Border>
+                                            <TextBlock Text="Çift Yönlü" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="Ön ve Arka Odaklı" FontSize="11.5" Foreground="{StaticResource BrushTextSecondary}" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                                            <TextBlock Text="Karşılıklı Röportaj / Düet" FontSize="10.5" Foreground="{StaticResource BrushTextMuted}" HorizontalAlignment="Center" Margin="0,2,0,0"/>
+                                        </StackPanel>
+                                    </RadioButton>
+
+                                    <!-- Omnidirectional -->
+                                    <RadioButton x:Name="RbPickupOmni"
+                                                 GroupName="PickupGroup"
+                                                 Style="{StaticResource CreatorModeTile}"
+                                                 Margin="4,0,4,0"
+                                                 IsChecked="True"
+                                                 Tag="Omnidirectional"
+                                                 Click="PickupPattern_Click">
+                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Border Width="48" Height="48" CornerRadius="24" Background="#0B0C0B" Margin="0,0,0,12">
+                                                <Path Data="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7Z"
+                                                      Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" Stretch="Uniform" Width="21" Height="21"/>
+                                            </Border>
+                                            <TextBlock Text="Tüm Yönlü" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="360° Çevresel Ses" FontSize="11.5" Foreground="{StaticResource BrushTextSecondary}" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                                            <TextBlock Text="Toplantı &amp; Grup Kaydı" FontSize="10.5" Foreground="{StaticResource BrushTextMuted}" HorizontalAlignment="Center" Margin="0,2,0,0"/>
+                                        </StackPanel>
+                                    </RadioButton>
+
+                                    <!-- Stereo -->
+                                    <RadioButton x:Name="RbPickupStereo"
+                                                 GroupName="PickupGroup"
+                                                 Style="{StaticResource CreatorModeTile}"
+                                                 Margin="8,0,0,0"
+                                                 Tag="Stereo"
+                                                 Click="PickupPattern_Click">
+                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Border Width="48" Height="48" CornerRadius="24" Background="#0B0C0B" Margin="0,0,0,12">
+                                                <Path Data="M8,5A7,7 0 0,0 1,12A7,7 0 0,0 8,19A7,7 0 0,0 15,12A7,7 0 0,0 8,5M16,5A7,7 0 0,0 9,12A7,7 0 0,0 16,19A7,7 0 0,0 23,12A7,7 0 0,0 16,5Z"
+                                                      Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" Stretch="Uniform" Width="22" Height="22"/>
+                                            </Border>
+                                            <TextBlock Text="Stereo" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="Sol &amp; Sağ Kanal Ayrımı" FontSize="11.5" Foreground="{StaticResource BrushTextSecondary}" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                                            <TextBlock Text="Enstrüman &amp; ASMR" FontSize="10.5" Foreground="{StaticResource BrushTextMuted}" HorizontalAlignment="Center" Margin="0,2,0,0"/>
+                                        </StackPanel>
+                                    </RadioButton>
+                                </UniformGrid>
+                            </Grid>
+                        </Border>
+                    </Grid>
+
+                    <!-- ========================================================================= -->
+                    <!-- PAGE 2: RGB LAB (VISUALIZER, EFFECTS, LED PALETTE, BRIGHTNESS & SPEED)    -->
+                    <!-- ========================================================================= -->
+                    <Grid x:Name="PageRgbLab" Visibility="Collapsed">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="320"/>
+                            <ColumnDefinition Width="18"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- LEFT: EM68X RGB CAPSULE VISUALIZER CARD -->
+                        <Border Grid.Column="0" Style="{StaticResource CreatorPanel}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Grid.Row="0">
+                                    <TextBlock Text="EM68X LED ÖNİZLEME" FontSize="13" FontWeight="Bold" Foreground="{StaticResource BrushTextPrimary}"/>
+                                    <TextBlock Text="Seçili donanım aydınlatma profili" FontSize="11.5" Foreground="{StaticResource BrushTextSecondary}" Margin="0,2,0,0"/>
+                                </StackPanel>
+
+                                <!-- Stylized Microphone + RGB Ring Visualizer -->
+                                <Grid Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,16">
+                                    <!-- Ambient Halo -->
+                                    <Ellipse Width="190" Height="190" Opacity="0.22">
+                                        <Ellipse.Fill>
+                                            <SolidColorBrush x:Name="BrushRgbGlow" Color="#F000FF"/>
+                                        </Ellipse.Fill>
+                                        <Ellipse.Effect>
+                                            <BlurEffect Radius="36"/>
+                                        </Ellipse.Effect>
+                                    </Ellipse>
+
+                                    <!-- Outer Chassis Ring -->
+                                    <Ellipse Width="156" Height="156" Fill="#0A0B0A" Stroke="#242821" StrokeThickness="2"/>
+
+                                    <!-- Active LED Ring -->
+                                    <Border x:Name="RingRgbPreview" Width="128" Height="128" CornerRadius="64" BorderThickness="5" Background="#0D0E0D">
+                                        <Border.BorderBrush>
+                                            <SolidColorBrush x:Name="BrushRgbPreview" Color="#F000FF"/>
+                                        </Border.BorderBrush>
+                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <Path Data="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z"
+                                                  Fill="{StaticResource BrushTextPrimary}" Stretch="Uniform" Width="30" Height="30" Margin="0,0,0,6"/>
+                                            <TextBlock Text="EM68X RGB" FontSize="10.5" FontFamily="Consolas" FontWeight="Bold" Foreground="{StaticResource BrushTextSecondary}" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+
+                                <!-- Power & Active Color Readout -->
+                                <Border Grid.Row="2" Background="#0A0B0A" BorderBrush="{StaticResource BrushBorderSubtle}" BorderThickness="1" CornerRadius="8" Padding="14,12">
+                                    <StackPanel>
+                                        <Grid Margin="0,0,0,10">
+                                            <TextBlock Text="Aydınlatma Gücü" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource BrushTextPrimary}" VerticalAlignment="Center"/>
+                                            <CheckBox x:Name="ChkRgbPower"
+                                                      Style="{StaticResource CreatorToggleSwitch}"
+                                                      Content=""
+                                                      IsChecked="True"
+                                                      HorizontalAlignment="Right"
+                                                      VerticalAlignment="Center"
+                                                      Click="ChkRgbPower_Click"/>
+                                        </Grid>
+                                        <Grid>
+                                            <TextBlock Text="Seçili Renk" FontSize="11.5" Foreground="{StaticResource BrushTextSecondary}" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="TxtSelectedColorName" Text="Magenta" FontSize="12" FontFamily="Consolas, Segoe UI" FontWeight="Bold" Foreground="{StaticResource BrushTextPrimary}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!-- RIGHT: RGB EFFECTS, SWATCH PALETTE, BRIGHTNESS & SPEED -->
+                        <Border Grid.Column="2" Style="{StaticResource CreatorPanel}">
+                            <StackPanel>
+                                <TextBlock Text="RGB AYDINLATMA LABORATUVARI" FontSize="14" FontWeight="Bold" Foreground="{StaticResource BrushTextPrimary}"/>
+                                <TextBlock Text="Mikrofon gövdesindeki LED efekt modunu, gerçek donanım rengini ve geçiş hızını yapılandırın"
+                                           FontSize="11.5" Foreground="{StaticResource BrushTextSecondary}" Margin="0,3,0,20"/>
+
+                                <!-- 5 RGB Effect Modes -->
+                                <TextBlock Text="AYDINLATMA EFEKT MODU" FontSize="11" FontFamily="Consolas, Segoe UI" FontWeight="Bold" Foreground="{StaticResource BrushTextSecondary}" Margin="0,0,0,10"/>
+                                <UniformGrid Columns="5" Rows="1" Margin="0,0,0,22">
+                                    <RadioButton x:Name="RbModeMonochrome"
+                                                 GroupName="RgbModeGroup"
+                                                 Style="{StaticResource CreatorModeTile}"
+                                                 Margin="0,0,5,0" Padding="8,14"
+                                                 IsChecked="True"
+                                                 Tag="Monochrome"
+                                                 Click="RgbMode_Click">
+                                        <StackPanel HorizontalAlignment="Center">
+                                            <TextBlock Text="Sabit" FontSize="13" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="Tek Renk" FontSize="10.5" Foreground="{StaticResource BrushTextSecondary}" HorizontalAlignment="Center" Margin="0,3,0,0"/>
+                                        </StackPanel>
+                                    </RadioButton>
+
+                                    <RadioButton x:Name="RbModeBreathing"
+                                                 GroupName="RgbModeGroup"
+                                                 Style="{StaticResource CreatorModeTile}"
+                                                 Margin="3,0,3,0" Padding="8,14"
+                                                 Tag="Breathing"
+                                                 Click="RgbMode_Click">
+                                        <StackPanel HorizontalAlignment="Center">
+                                            <TextBlock Text="Nefes" FontSize="13" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="Yumuşak Nabız" FontSize="10.5" Foreground="{StaticResource BrushTextSecondary}" HorizontalAlignment="Center" Margin="0,3,0,0"/>
+                                        </StackPanel>
+                                    </RadioButton>
+
+                                    <RadioButton x:Name="RbModeGradient"
+                                                 GroupName="RgbModeGroup"
+                                                 Style="{StaticResource CreatorModeTile}"
+                                                 Margin="3,0,3,0" Padding="8,14"
+                                                 Tag="Gradient"
+                                                 Click="RgbMode_Click">
+                                        <StackPanel HorizontalAlignment="Center">
+                                            <TextBlock Text="Geçişli" FontSize="13" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="Gradyan Akış" FontSize="10.5" Foreground="{StaticResource BrushTextSecondary}" HorizontalAlignment="Center" Margin="0,3,0,0"/>
+                                        </StackPanel>
+                                    </RadioButton>
+
+                                    <RadioButton x:Name="RbModeLoop"
+                                                 GroupName="RgbModeGroup"
+                                                 Style="{StaticResource CreatorModeTile}"
+                                                 Margin="3,0,3,0" Padding="8,14"
+                                                 Tag="RgbLoop"
+                                                 Click="RgbMode_Click">
+                                        <StackPanel HorizontalAlignment="Center">
+                                            <TextBlock Text="7 Renk" FontSize="13" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="Otomatik Döngü" FontSize="10.5" Foreground="{StaticResource BrushTextSecondary}" HorizontalAlignment="Center" Margin="0,3,0,0"/>
+                                        </StackPanel>
+                                    </RadioButton>
+
+                                    <RadioButton x:Name="RbModeSound"
+                                                 GroupName="RgbModeGroup"
+                                                 Style="{StaticResource CreatorModeTile}"
+                                                 Margin="5,0,0,0" Padding="8,14"
+                                                 Tag="SoundEffect"
+                                                 Click="RgbMode_Click">
+                                        <StackPanel HorizontalAlignment="Center">
+                                            <TextBlock Text="Müzik" FontSize="13" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="Sese Duyarlı" FontSize="10.5" Foreground="{StaticResource BrushTextSecondary}" HorizontalAlignment="Center" Margin="0,3,0,0"/>
+                                        </StackPanel>
+                                    </RadioButton>
+                                </UniformGrid>
+
+                                <!-- 7 Hardware LED Color Swatches -->
+                                <StackPanel x:Name="PanelColorSwatches" Margin="0,0,0,22">
+                                    <TextBlock Text="DONANIM LED RENK PALETİ" FontSize="11" FontFamily="Consolas, Segoe UI" FontWeight="Bold" Foreground="{StaticResource BrushTextSecondary}" Margin="0,0,0,10"/>
+                                    <Border Background="#0A0B0A" BorderBrush="{StaticResource BrushBorderSubtle}" BorderThickness="1" CornerRadius="8" Padding="14,12">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <RadioButton x:Name="RbColorRed" GroupName="RgbColorGroup" Style="{StaticResource CreatorColorSwatch}" Background="#FF2A2A" Tag="Red" ToolTip="Kırmızı" Click="RgbColor_Click"/>
+                                            <RadioButton x:Name="RbColorMagenta" GroupName="RgbColorGroup" Style="{StaticResource CreatorColorSwatch}" Background="#F000FF" Tag="Magenta" IsChecked="True" ToolTip="Magenta" Click="RgbColor_Click"/>
+                                            <RadioButton x:Name="RbColorBlue" GroupName="RgbColorGroup" Style="{StaticResource CreatorColorSwatch}" Background="#2563EB" Tag="Blue" ToolTip="Mavi" Click="RgbColor_Click"/>
+                                            <RadioButton x:Name="RbColorCyan" GroupName="RgbColorGroup" Style="{StaticResource CreatorColorSwatch}" Background="#00F0FF" Tag="Cyan" ToolTip="Camgöbeği" Click="RgbColor_Click"/>
+                                            <RadioButton x:Name="RbColorGreen" GroupName="RgbColorGroup" Style="{StaticResource CreatorColorSwatch}" Background="#10B981" Tag="Green" ToolTip="Yeşil" Click="RgbColor_Click"/>
+                                            <RadioButton x:Name="RbColorYellow" GroupName="RgbColorGroup" Style="{StaticResource CreatorColorSwatch}" Background="#FACC15" Tag="Yellow" ToolTip="Sarı" Click="RgbColor_Click"/>
+                                            <RadioButton x:Name="RbColorWhite" GroupName="RgbColorGroup" Style="{StaticResource CreatorColorSwatch}" Background="#FFFFFF" Tag="White" ToolTip="Beyaz / Geçişli Modda Turuncu" Click="RgbColor_Click"/>
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
+
+                                <!-- Brightness Slider -->
+                                <Grid Margin="0,0,0,8">
+                                    <TextBlock Text="LED Işık Parlaklığı" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource BrushTextPrimary}" VerticalAlignment="Center"/>
+                                    <Border Style="{StaticResource TechValueBadge}" HorizontalAlignment="Right" MinWidth="54">
+                                        <TextBlock x:Name="TxtBrightnessValue" Text="100%" FontSize="12" FontFamily="Consolas" FontWeight="Bold" Foreground="{StaticResource BrushAccentCyan}" HorizontalAlignment="Center"/>
+                                    </Border>
+                                </Grid>
+                                <Slider x:Name="SliderBrightness"
+                                        Style="{StaticResource CreatorSlider}"
+                                        Foreground="{StaticResource BrushAccentCyan}"
+                                        Minimum="0" Maximum="100" Value="100"
+                                        TickFrequency="1" IsSnapToTickEnabled="True"
+                                        Margin="0,0,0,18"
+                                        ValueChanged="SliderBrightness_ValueChanged"
                                         PreviewMouseLeftButtonDown="RgbSlider_PreviewMouseDown"
                                         PreviewMouseLeftButtonUp="RgbSlider_PreviewMouseUp"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </Border>
 
-                    <!-- CARD 2: COMPACT LIVE HARDWARE TELEMETRY & LOG -->
-                    <Border Grid.Row="2" Style="{StaticResource StudioCard}" Padding="18,14">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="10"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-
-                            <Grid Grid.Row="0">
-                                <StackPanel>
-                                    <TextBlock Text="DONANIM İLETİŞİM GÜNLÜĞÜ" FontSize="12.5" FontWeight="Bold" Foreground="#F8FAFC"/>
-                                    <TextBlock x:Name="TxtLastRawState"
-                                               Text="Durum: BLE bağlantısı bekleniyor..."
-                                               FontSize="11" FontFamily="Consolas" Foreground="#818CF8" Margin="0,2,0,0"/>
+                                <!-- Animation Speed Slider -->
+                                <StackPanel x:Name="PanelSpeedControl">
+                                    <Grid Margin="0,0,0,8">
+                                        <TextBlock Text="Efekt Animasyon Hızı" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource BrushTextPrimary}" VerticalAlignment="Center"/>
+                                        <Border Style="{StaticResource TechValueBadge}" HorizontalAlignment="Right" MinWidth="54">
+                                            <TextBlock x:Name="TxtSpeedValue" Text="100%" FontSize="12" FontFamily="Consolas" FontWeight="Bold" Foreground="{StaticResource BrushAccentViolet}" HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </Grid>
+                                    <Slider x:Name="SliderSpeed"
+                                            Style="{StaticResource CreatorSlider}"
+                                            Foreground="{StaticResource BrushAccentViolet}"
+                                            Minimum="1" Maximum="100" Value="100"
+                                            TickFrequency="1" IsSnapToTickEnabled="True"
+                                            ValueChanged="SliderSpeed_ValueChanged"
+                                            PreviewMouseLeftButtonDown="RgbSlider_PreviewMouseDown"
+                                            PreviewMouseLeftButtonUp="RgbSlider_PreviewMouseUp"/>
                                 </StackPanel>
-                                <Button Content="Temizle"
-                                        Style="{StaticResource SoftPillButton}"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Top"
-                                        Padding="10,4"
-                                        FontSize="11"
-                                        Click="BtnClearLog_Click"/>
-                            </Grid>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
 
-                            <Border Grid.Row="2" Background="#080A10" BorderBrush="#192032" BorderThickness="1" CornerRadius="10" Padding="6">
-                                <ListBox x:Name="LstProtocolLog"
-                                         Background="Transparent"
-                                         Foreground="#94A3B8"
-                                         BorderThickness="0"
-                                         FontFamily="Consolas"
-                                         FontSize="11"
-                                         ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
-                            </Border>
-                        </Grid>
-                    </Border>
+                    <!-- ========================================================================= -->
+                    <!-- PAGE 3: CONTROLS (TOUCH SENSOR, GESTURE & MUTE BEHAVIOR)                  -->
+                    <!-- ========================================================================= -->
+                    <Grid x:Name="PageControls" Visibility="Collapsed">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="18"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Border Grid.Row="0" Style="{StaticResource CreatorPanel}">
+                            <StackPanel>
+                                <Grid Margin="0,0,0,20">
+                                    <StackPanel>
+                                        <TextBlock Text="ÜST DOKUNMATİK &amp; KIZILÖTESİ HAREKET SENSÖRÜ" FontSize="14" FontWeight="Bold" Foreground="{StaticResource BrushTextPrimary}"/>
+                                        <TextBlock Text="Mikrofonun üst yüzeyindeki hızlı sessize alma (Mute) sensörünün çalışma davranışını seçin"
+                                                   FontSize="11.5" Foreground="{StaticResource BrushTextSecondary}" Margin="0,3,0,0"/>
+                                    </StackPanel>
+                                    <Border Style="{StaticResource TechValueBadge}" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                        <TextBlock x:Name="TxtActiveSensorBadge" Text="El Hareketi" FontSize="12" FontFamily="Consolas, Segoe UI" FontWeight="Bold" Foreground="{StaticResource BrushAccentCyan}"/>
+                                    </Border>
+                                </Grid>
+
+                                <UniformGrid Columns="2" Rows="2">
+                                    <RadioButton x:Name="RbCtrlNoClose"
+                                                 GroupName="SensorGroup"
+                                                 Style="{StaticResource CreatorModeTile}"
+                                                 Margin="0,0,8,10"
+                                                 Padding="18,20"
+                                                 Tag="NoClose"
+                                                 Click="SensorMode_Click">
+                                        <StackPanel HorizontalAlignment="Center">
+                                            <TextBlock Text="Sensör Devre Dışı (Kilitli)" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="Üst sensör yanlışlıkla dokunmalara karşı kapatılır; mikrofon sürekli açık kalır."
+                                                       FontSize="11.5" Foreground="{StaticResource BrushTextSecondary}" TextAlignment="Center" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                                        </StackPanel>
+                                    </RadioButton>
+
+                                    <RadioButton x:Name="RbCtrlTouch"
+                                                 GroupName="SensorGroup"
+                                                 Style="{StaticResource CreatorModeTile}"
+                                                 Margin="8,0,0,10"
+                                                 Padding="18,20"
+                                                 Tag="Touch"
+                                                 Click="SensorMode_Click">
+                                        <StackPanel HorizontalAlignment="Center">
+                                            <TextBlock Text="Yalnızca Kapasitif Dokunmatik" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="Sadece parmağınızla mikrofonun üst yüzeyine fiziksel olarak dokunduğunuzda sessize alır."
+                                                       FontSize="11.5" Foreground="{StaticResource BrushTextSecondary}" TextAlignment="Center" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                                        </StackPanel>
+                                    </RadioButton>
+
+                                    <RadioButton x:Name="RbCtrlHandSweep"
+                                                 GroupName="SensorGroup"
+                                                 Style="{StaticResource CreatorModeTile}"
+                                                 Margin="0,6,8,0"
+                                                 Padding="18,20"
+                                                 IsChecked="True"
+                                                 Tag="HandSweep"
+                                                 Click="SensorMode_Click">
+                                        <StackPanel HorizontalAlignment="Center">
+                                            <TextBlock Text="El Hareketi (Temassız Geçiş)" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="Mikrofona fiziksel temas etmeden, elinizi üstten geçirerek gürültüsüzce sessize alır."
+                                                       FontSize="11.5" Foreground="{StaticResource BrushTextSecondary}" TextAlignment="Center" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                                        </StackPanel>
+                                    </RadioButton>
+
+                                    <RadioButton x:Name="RbCtrlAnyKey"
+                                                 GroupName="SensorGroup"
+                                                 Style="{StaticResource CreatorModeTile}"
+                                                 Margin="8,6,0,0"
+                                                 Padding="18,20"
+                                                 Tag="AnyKey"
+                                                 Click="SensorMode_Click">
+                                        <StackPanel HorizontalAlignment="Center">
+                                            <TextBlock Text="Her İkisi (Dokunma + El Geçişi)" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="Hem fiziksel dokunmayı hem de temassız el hareketini aynı anda algılar."
+                                                       FontSize="11.5" Foreground="{StaticResource BrushTextSecondary}" TextAlignment="Center" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                                        </StackPanel>
+                                    </RadioButton>
+                                </UniformGrid>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- SYSTEM & BACKGROUND BEHAVIOR INFO CARD -->
+                        <Border Grid.Row="2" Style="{StaticResource CreatorPanel}">
+                            <Grid>
+                                <StackPanel>
+                                    <TextBlock Text="MASAÜSTÜ &amp; SİSTEM TEPSİSİ (TRAY) DAVRANIŞI" FontSize="13" FontWeight="Bold" Foreground="{StaticResource BrushTextPrimary}"/>
+                                    <TextBlock Text="Pencereyi üst bardaki küçült (—) tuşuyla küçülttüğünüzde uygulama görev çubuğunda yer kaplamaz; sağ alt gizli simgelerde (System Tray) çalışmaya ve mikrofon bağlantısını korumaya devam eder."
+                                               FontSize="11.5" Foreground="{StaticResource BrushTextSecondary}" TextWrapping="Wrap" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </Grid>
+
+                    <!-- ========================================================================= -->
+                    <!-- PAGE 4: DEVICE & LOGS (BLE DISCOVERY, CONNECT/RESET, DIAGNOSTIC CONSOLE)  -->
+                    <!-- ========================================================================= -->
+                    <Grid x:Name="PageDeviceLogs" Visibility="Collapsed">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="18"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- BLUETOOTH & USB DEVICE MANAGEMENT PANEL -->
+                        <Border Grid.Row="0" Style="{StaticResource CreatorPanel}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                    <TextBlock Text="DONANIM BAĞLANTI YÖNETİMİ (BLUETOOTH LE &amp; USB)" FontSize="14" FontWeight="Bold" Foreground="{StaticResource BrushTextPrimary}"/>
+                                    <TextBlock Text="Keşfedilen Godox EM68X ('LK*') cihazını seçin, bağlantıyı yenileyin veya Bluetooth adaptörünü sıfırlayın"
+                                               FontSize="11.5" Foreground="{StaticResource BrushTextSecondary}" Margin="0,3,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <ComboBox x:Name="CmbDevices"
+                                              Style="{StaticResource CreatorComboBox}"
+                                              Width="230"
+                                              Margin="0,0,8,0"
+                                              ToolTip="Keşfedilen Godox EM68X ('LK*') BLE Cihazları"/>
+                                    <Button x:Name="BtnConnect"
+                                            Content="Bağlan"
+                                            Height="34"
+                                            Style="{StaticResource CreatorPrimaryButton}"
+                                            Margin="0,0,6,0"
+                                            Click="BtnConnect_Click"/>
+                                    <Button x:Name="BtnResetBle"
+                                            Content="BT Sıfırla"
+                                            Height="34"
+                                            Style="{StaticResource CreatorSecondaryButton}"
+                                            Margin="0,0,6,0"
+                                            ToolTip="Bilgisayarın Bluetooth adaptörünü yeniden başlatıp mikrofona bağlanır"
+                                            Click="BtnResetBle_Click"/>
+                                    <Button x:Name="BtnRefreshStatus"
+                                            Content="Yenile"
+                                            Height="34"
+                                            Style="{StaticResource CreatorSecondaryButton}"
+                                            Click="BtnRefreshStatus_Click"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <!-- LIVE HARDWARE DIAGNOSTIC CONSOLE -->
+                        <Border Grid.Row="2" Style="{StaticResource CreatorPanel}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="12"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0">
+                                    <StackPanel>
+                                        <TextBlock Text="CANLI DONANIM TANILAMA KONSOLU (BLE PROTOCOL STREAM)" FontSize="13.5" FontWeight="Bold" Foreground="{StaticResource BrushTextPrimary}"/>
+                                        <TextBlock x:Name="TxtLastRawState"
+                                                   Text="Durum: BLE bağlantısı bekleniyor..."
+                                                   FontSize="11.5" FontFamily="Consolas" Foreground="{StaticResource BrushAccentCyan}" Margin="0,3,0,0"/>
+                                    </StackPanel>
+                                    <Button Content="Günlüğü Temizle"
+                                            Style="{StaticResource CreatorSecondaryButton}"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Center"
+                                            Padding="12,5"
+                                            FontSize="11.5"
+                                            Click="BtnClearLog_Click"/>
+                                </Grid>
+
+                                <Border Grid.Row="2" Background="#070807" BorderBrush="{StaticResource BrushBorderSubtle}" BorderThickness="1" CornerRadius="8" Padding="8">
+                                    <ListBox x:Name="LstProtocolLog"
+                                             Background="Transparent"
+                                             Foreground="{StaticResource BrushTextSecondary}"
+                                             BorderThickness="0"
+                                             FontFamily="Consolas"
+                                             FontSize="11.5"
+                                             ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                                        <ListBox.ItemContainerStyle>
+                                            <Style TargetType="ListBoxItem">
+                                                <Setter Property="Padding" Value="6,3"/>
+                                                <Setter Property="Foreground" Value="{StaticResource BrushTextSecondary}"/>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="ListBoxItem">
+                                                            <Border x:Name="bd" Background="Transparent" Padding="{TemplateBinding Padding}" CornerRadius="4">
+                                                                <ContentPresenter/>
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter TargetName="bd" Property="Background" Value="#121411"/>
+                                                                    <Setter Property="Foreground" Value="{StaticResource BrushTextPrimary}"/>
+                                                                </Trigger>
+                                                                <Trigger Property="IsSelected" Value="True">
+                                                                    <Setter TargetName="bd" Property="Background" Value="#1A1D18"/>
+                                                                    <Setter Property="Foreground" Value="{StaticResource BrushAccentCyan}"/>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ListBox.ItemContainerStyle>
+                                    </ListBox>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>
