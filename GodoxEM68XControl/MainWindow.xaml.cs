@@ -20,10 +20,24 @@ public partial class MainWindow : Window
     private readonly DispatcherTimer _autoReconnectTimer;
     private readonly ObservableCollection<string> _logEntries = new();
     private System.Windows.Forms.NotifyIcon? _trayIcon;
+    private System.Windows.Forms.ToolStripMenuItem? _trayAutoStartItem;
 
     private bool _isUiInitialized;
     private bool _isApplyingRemoteState;
     private bool _isConnecting;
+    private bool _isRestoringFromTray;
+    private bool _hasCompletedInitialLoad;
+
+    // Startup behavior
+    private const int StartupMicVolume = 100;
+    private readonly bool _startInTray;
+    private bool _pendingStartupMicVolume = true;
+
+    [System.Runtime.InteropServices.DllImport("user32.dll")]
+    private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+    [System.Runtime.InteropServices.DllImport("user32.dll")]
+    private static extern bool SetForegroundWindow(IntPtr hWnd);
 
     // Device state cache
     private ControlSensorMode _currentSensorMode = ControlSensorMode.HandSweep;
@@ -44,10 +58,15 @@ public partial class MainWindow : Window
         public override string ToString() => DisplayText;
     }
 
-    public MainWindow()
+    public MainWindow() : this(false) { }
+
+    public MainWindow(bool startInTray)
     {
+        _startInTray = startInTray;
         InitializeComponent();
         _isUiInitialized = true;
+
+        ChkStartWithWindows.IsChecked = StartupManager.IsEnabled;
 
         LstProtocolLog.ItemsSource = _logEntries;
 
@@ -83,6 +102,9 @@ public partial class MainWindow : Window
         Loaded += MainWindow_Loaded;
         StateChanged += MainWindow_StateChanged;
         Closed += MainWindow_Closed;
+
+        // Start audio & BLE services immediately (even if window is hidden in tray on Windows boot)
+        Dispatcher.BeginInvoke( DispatcherPriority.Background, new Action(async () => await EnsureServicesStartedAsync()));
     }
 
     private void InitializeTrayIcon()
@@ -110,9 +132,24 @@ public partial class MainWindow : Window
         var contextMenu = new System.Windows.Forms.ContextMenuStrip();
         var openItem = new System.Windows.Forms.ToolStripMenuItem("Godox EM68X Studio'yu Aç");
         openItem.Click += (_, _) => Dispatcher.Invoke(RestoreFromTray);
+
+        _trayAutoStartItem = new System.Windows.Forms.ToolStripMenuItem("Windows ile Otomatik Başlat")
+        {
+            Checked = StartupManager.IsEnabled,
+            CheckOnClick = true
+        };
+        _trayAutoStartItem.Click += (_, _) => Dispatcher.Invoke(() =>
+        {
+            bool enabled = _trayAutoStartItem.Checked;
+            StartupManager.SetEnabled(enabled);
+            if (ChkStartWithWindows is not null)
+                ChkStartWithWindows.IsChecked = enabled;
+        });
+
         var exitItem = new System.Windows.Forms.ToolStripMenuItem("Çıkış");
         exitItem.Click += (_, _) => Dispatcher.Invoke(Close);
         contextMenu.Items.Add(openItem);
+        contextMenu.Items.Add(_trayAutoStartItem);
         contextMenu.Items.Add(new System.Windows.Forms.ToolStripSeparator());
         contextMenu.Items.Add(exitItem);
 
@@ -134,30 +171,88 @@ public partial class MainWindow : Window
         _trayIcon.DoubleClick += (_, _) => Dispatcher.Invoke(RestoreFromTray);
     }
 
-    private void MinimizeToTray()
+    public void MinimizeToTray()
     {
-        ShowInTaskbar = false;
+        // Hide() removes the window from the taskbar without changing ShowInTaskbar
+        // (changing ShowInTaskbar recreates the Win32 HWND and breaks WindowChrome rendering).
         Hide();
     }
 
-    private void RestoreFromTray()
+    public void RestoreFromTray()
     {
-        Show();
-        ShowInTaskbar = true;
-        WindowState = WindowState.Normal;
-        Activate();
+        _isRestoringFromTray = true;
+        try
+        {
+            if (!IsVisible)
+            {
+                Show();
+            }
+
+            if (WindowState == WindowState.Minimized)
+            {
+                WindowState = WindowState.Normal;
+            }
+
+            var hwnd = new System.Windows.Interop.WindowInteropHelper(this).EnsureHandle();
+            ShowWindow(hwnd, 9 /* SW_RESTORE */);
+            ShowWindow(hwnd, 5 /* SW_SHOW */);
+            SetForegroundWindow(hwnd);
+
+            Topmost = true;
+            Topmost = false;
+            Activate();
+            Focus();
+        }
+        finally
+        {
+            _isRestoringFromTray = false;
+        }
     }
 
     private void MainWindow_StateChanged(object? sender, EventArgs e)
     {
-        if (WindowState == WindowState.Minimized)
+        if (!_isRestoringFromTray && WindowState == WindowState.Minimized)
         {
-            MinimizeToTray();
+            _isRestoringFromTray = true;
+            try
+            {
+                WindowState = WindowState.Normal;
+                Hide();
+            }
+            finally
+            {
+                _isRestoringFromTray = false;
+            }
+        }
+    }
+
+    private void ChkStartWithWindows_Click(object sender, RoutedEventArgs e)
+    {
+        bool enabled = ChkStartWithWindows.IsChecked == true;
+        StartupManager.SetEnabled(enabled);
+        if (_trayAutoStartItem is not null)
+        {
+            _trayAutoStartItem.Checked = enabled;
         }
     }
 
     private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
     {
+        await EnsureServicesStartedAsync();
+    }
+
+    private async Task EnsureServicesStartedAsync()
+    {
+        if (_hasCompletedInitialLoad) return;
+        _hasCompletedInitialLoad = true;
+
+        // Start with microphone level at 100% (Windows USB endpoint now, hardware on first BLE state)
+        _audioService.RefreshEndpoints();
+        _audioService.SetWindowsMicVolumePercent(StartupMicVolume);
+        _currentMicVolume = StartupMicVolume;
+        SliderMicVolume.Value = StartupMicVolume;
+        TxtMicVolumeValue.Text = $"{StartupMicVolume}%";
+
         UpdateUsbAudioStatus();
         _audioMeterTimer.Start();
         _autoReconnectTimer.Start();
@@ -178,6 +273,7 @@ public partial class MainWindow : Window
         _autoReconnectTimer.Stop();
         _bleService.Dispose();
         _audioService.Dispose();
+        Application.Current.Shutdown();
     }
 
     // ==================== CUSTOM WINDOW CHROME HANDLERS ====================
@@ -430,6 +526,27 @@ public partial class MainWindow : Window
             finally
             {
                 _isApplyingRemoteState = false;
+            }
+
+            // First hardware state after app start: push microphone level to 100%
+            if (_pendingStartupMicVolume)
+            {
+                _pendingStartupMicVolume = false;
+                if (state.MicVolume != StartupMicVolume)
+                {
+                    _currentMicVolume = StartupMicVolume;
+                    _isApplyingRemoteState = true;
+                    try
+                    {
+                        SliderMicVolume.Value = StartupMicVolume;
+                        TxtMicVolumeValue.Text = $"{StartupMicVolume}%";
+                    }
+                    finally
+                    {
+                        _isApplyingRemoteState = false;
+                    }
+                    SendCurrentAudioStateToHardware();
+                }
             }
         });
     }

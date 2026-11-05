@@ -1313,11 +1313,22 @@
                         <!-- SYSTEM & BACKGROUND BEHAVIOR INFO CARD -->
                         <Border Grid.Row="2" Style="{StaticResource CreatorPanel}">
                             <Grid>
-                                <StackPanel>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,20,0">
                                     <TextBlock Text="MASAÜSTÜ &amp; SİSTEM TEPSİSİ (TRAY) DAVRANIŞI" FontSize="13" FontWeight="Bold" Foreground="{StaticResource BrushTextPrimary}"/>
-                                    <TextBlock Text="Pencereyi üst bardaki küçült (—) tuşuyla küçülttüğünüzde uygulama görev çubuğunda yer kaplamaz; sağ alt gizli simgelerde (System Tray) çalışmaya ve mikrofon bağlantısını korumaya devam eder."
+                                    <TextBlock Text="Windows açıldığında uygulama gizli simgelerde (System Tray) otomatik başlar ve mikrofon ses seviyesini %100 olarak ayarlar. Pencereyi küçült (—) tuşuyla küçülttüğünüzde görev çubuğunda yer kaplamadan arka planda çalışmaya devam eder."
                                                FontSize="11.5" Foreground="{StaticResource BrushTextSecondary}" TextWrapping="Wrap" Margin="0,4,0,0"/>
                                 </StackPanel>
+                                <CheckBox x:Name="ChkStartWithWindows"
+                                          Grid.Column="1"
+                                          Style="{StaticResource CreatorToggleSwitch}"
+                                          Content="Windows ile Otomatik Başlat"
+                                          VerticalAlignment="Center"
+                                          IsChecked="True"
+                                          Click="ChkStartWithWindows_Click"/>
                             </Grid>
                         </Border>
                     </Grid>

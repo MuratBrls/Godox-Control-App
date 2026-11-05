@@ -19,6 +19,47 @@ public partial class App : Application
     [DllImport("user32.dll")]
     private static extern bool SetForegroundWindow(IntPtr hWnd);
 
+    [DllImport("user32.dll")]
+    private static extern bool AllowSetForegroundWindow(int dwProcessId);
+
+    private const int ASFW_ANY = -1;
+    private const string SingleInstanceMutexName = "GodoxEM68XStudio_SingleInstance";
+    private const string ShowWindowEventName = "GodoxEM68XStudio_ShowWindow";
+
+    private System.Threading.Mutex? _singleInstanceMutex;
+    private System.Threading.EventWaitHandle? _showWindowEvent;
+
+    /// <summary>
+    /// Listens for a second launch attempt and restores the existing window from the tray.
+    /// </summary>
+    private void StartShowWindowListener(MainWindow window)
+    {
+        _showWindowEvent = new System.Threading.EventWaitHandle(
+            false,
+            System.Threading.EventResetMode.AutoReset,
+            ShowWindowEventName);
+
+        var thread = new System.Threading.Thread(() =>
+        {
+            while (true)
+            {
+                _showWindowEvent.WaitOne();
+                window.Dispatcher.BeginInvoke(() =>
+                {
+                    try
+                    {
+                        window.RestoreFromTray();
+                    }
+                    catch { }
+                });
+            }
+        })
+        {
+            IsBackground = true
+        };
+        thread.Start();
+    }
+
     private async void Application_Startup(object sender, StartupEventArgs e)
     {
         DispatcherUnhandledException += (_, args) =>
@@ -43,8 +84,39 @@ public partial class App : Application
             return;
         }
 
-        var mainWindow = new MainWindow();
+        // Single instance: if already running (e.g. in tray from Windows startup), bring it to front and exit
+        _singleInstanceMutex = new System.Threading.Mutex(true, SingleInstanceMutexName, out bool isFirstInstance);
+        if (!isFirstInstance)
+        {
+            try
+            {
+                AllowSetForegroundWindow(ASFW_ANY);
+                using var showEvent = System.Threading.EventWaitHandle.OpenExisting(ShowWindowEventName);
+                showEvent.Set();
+            }
+            catch { }
+            Shutdown(0);
+            return;
+        }
+
+        StartupManager.SyncOnLaunch();
+
+        bool startInTray = e.Args.Any(a => string.Equals(a, StartupManager.TrayArgument, StringComparison.OrdinalIgnoreCase));
+
+        // Keep application alive even when the main window is hidden in the system tray
+        ShutdownMode = ShutdownMode.OnExplicitShutdown;
+
+        var mainWindow = new MainWindow(startInTray);
         MainWindow = mainWindow;
+        StartShowWindowListener(mainWindow);
+
+        if (startInTray)
+        {
+            // Do NOT call mainWindow.Show() on Windows startup:
+            // the tray icon and background BLE/Audio services run without creating a visible window.
+            return;
+        }
+
         mainWindow.Show();
 
         var hwnd = new WindowInteropHelper(mainWindow).EnsureHandle();
