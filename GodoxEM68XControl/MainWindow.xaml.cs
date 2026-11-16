@@ -28,10 +28,12 @@ public partial class MainWindow : Window
     private bool _isRestoringFromTray;
     private bool _hasCompletedInitialLoad;
 
-    // Startup behavior
+    // Startup behavior (always enforced on every app start/restart)
     private const int StartupMicVolume = 100;
+    private const ControlSensorMode StartupSensorMode = ControlSensorMode.Touch;
+    private const RgbColorPreset StartupLightColor = RgbColorPreset.Red;
     private readonly bool _startInTray;
-    private bool _pendingStartupMicVolume = true;
+    private bool _pendingStartupDefaults = true;
 
     [System.Runtime.InteropServices.DllImport("user32.dll")]
     private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
@@ -40,14 +42,14 @@ public partial class MainWindow : Window
     private static extern bool SetForegroundWindow(IntPtr hWnd);
 
     // Device state cache
-    private ControlSensorMode _currentSensorMode = ControlSensorMode.HandSweep;
-    private int _currentMicVolume = 100;
+    private ControlSensorMode _currentSensorMode = StartupSensorMode;
+    private int _currentMicVolume = StartupMicVolume;
     private int _currentMonitorVolume = 64;
     private PickupPattern _currentPickupPattern = PickupPattern.Omnidirectional;
 
     private bool _isLightPowerOn = true;
     private RgbLightMode _currentLightMode = RgbLightMode.Monochrome;
-    private RgbColorPreset _currentLightColor = RgbColorPreset.Magenta;
+    private RgbColorPreset _currentLightColor = StartupLightColor;
     private int _currentBrightness = 100;
     private int _breatheSpeed = 100;
     private int _gradientSpeed = 100;
@@ -246,12 +248,25 @@ public partial class MainWindow : Window
         if (_hasCompletedInitialLoad) return;
         _hasCompletedInitialLoad = true;
 
-        // Start with microphone level at 100% (Windows USB endpoint now, hardware on first BLE state)
+        // Start with fixed startup defaults: Mic=100%, Sensor=Touch (capacitive only), Color=Red
         _audioService.RefreshEndpoints();
         _audioService.SetWindowsMicVolumePercent(StartupMicVolume);
         _currentMicVolume = StartupMicVolume;
-        SliderMicVolume.Value = StartupMicVolume;
-        TxtMicVolumeValue.Text = $"{StartupMicVolume}%";
+        _currentSensorMode = StartupSensorMode;
+        _currentLightColor = StartupLightColor;
+
+        _isApplyingRemoteState = true;
+        try
+        {
+            SliderMicVolume.Value = StartupMicVolume;
+            TxtMicVolumeValue.Text = $"{StartupMicVolume}%";
+            ApplySensorModeToUi(StartupSensorMode);
+            ApplyRgbColorToUi(StartupLightColor);
+        }
+        finally
+        {
+            _isApplyingRemoteState = false;
+        }
 
         UpdateUsbAudioStatus();
         _audioMeterTimer.Start();
@@ -528,24 +543,44 @@ public partial class MainWindow : Window
                 _isApplyingRemoteState = false;
             }
 
-            // First hardware state after app start: push microphone level to 100%
-            if (_pendingStartupMicVolume)
+            // First hardware state after app start: always enforce startup defaults
+            // (Mic=100%, Sensor=Touch only, RGB Color=Red) regardless of previous session state
+            if (_pendingStartupDefaults)
             {
-                _pendingStartupMicVolume = false;
-                if (state.MicVolume != StartupMicVolume)
+                _pendingStartupDefaults = false;
+
+                if (state.MicVolume != StartupMicVolume || state.ControlMode != StartupSensorMode)
                 {
                     _currentMicVolume = StartupMicVolume;
+                    _currentSensorMode = StartupSensorMode;
                     _isApplyingRemoteState = true;
                     try
                     {
                         SliderMicVolume.Value = StartupMicVolume;
                         TxtMicVolumeValue.Text = $"{StartupMicVolume}%";
+                        ApplySensorModeToUi(StartupSensorMode);
                     }
                     finally
                     {
                         _isApplyingRemoteState = false;
                     }
                     SendCurrentAudioStateToHardware();
+                }
+
+                if (state.LightColor != StartupLightColor)
+                {
+                    _currentLightColor = StartupLightColor;
+                    _isApplyingRemoteState = true;
+                    try
+                    {
+                        ApplyRgbColorToUi(StartupLightColor);
+                        UpdateRgbControlsVisibilityAndPreview();
+                    }
+                    finally
+                    {
+                        _isApplyingRemoteState = false;
+                    }
+                    SendCurrentRgbStateToHardware();
                 }
             }
         });

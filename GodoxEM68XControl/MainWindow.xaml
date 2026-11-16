@@ -1055,7 +1055,7 @@
                                     <!-- Ambient Halo -->
                                     <Ellipse Width="190" Height="190" Opacity="0.22">
                                         <Ellipse.Fill>
-                                            <SolidColorBrush x:Name="BrushRgbGlow" Color="#F000FF"/>
+                                            <SolidColorBrush x:Name="BrushRgbGlow" Color="#FF2A2A"/>
                                         </Ellipse.Fill>
                                         <Ellipse.Effect>
                                             <BlurEffect Radius="36"/>
@@ -1068,7 +1068,7 @@
                                     <!-- Active LED Ring -->
                                     <Border x:Name="RingRgbPreview" Width="128" Height="128" CornerRadius="64" BorderThickness="5" Background="#0D0E0D">
                                         <Border.BorderBrush>
-                                            <SolidColorBrush x:Name="BrushRgbPreview" Color="#F000FF"/>
+                                            <SolidColorBrush x:Name="BrushRgbPreview" Color="#FF2A2A"/>
                                         </Border.BorderBrush>
                                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                                             <Path Data="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z"
@@ -1093,7 +1093,7 @@
                                         </Grid>
                                         <Grid>
                                             <TextBlock Text="Seçili Renk" FontSize="11.5" Foreground="{StaticResource BrushTextSecondary}" VerticalAlignment="Center"/>
-                                            <TextBlock x:Name="TxtSelectedColorName" Text="Magenta" FontSize="12" FontFamily="Consolas, Segoe UI" FontWeight="Bold" Foreground="{StaticResource BrushTextPrimary}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="TxtSelectedColorName" Text="Kırmızı" FontSize="12" FontFamily="Consolas, Segoe UI" FontWeight="Bold" Foreground="{StaticResource BrushTextPrimary}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                         </Grid>
                                     </StackPanel>
                                 </Border>
@@ -1177,8 +1177,8 @@
                                     <TextBlock Text="DONANIM LED RENK PALETİ" FontSize="11" FontFamily="Consolas, Segoe UI" FontWeight="Bold" Foreground="{StaticResource BrushTextSecondary}" Margin="0,0,0,10"/>
                                     <Border Background="#0A0B0A" BorderBrush="{StaticResource BrushBorderSubtle}" BorderThickness="1" CornerRadius="8" Padding="14,12">
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <RadioButton x:Name="RbColorRed" GroupName="RgbColorGroup" Style="{StaticResource CreatorColorSwatch}" Background="#FF2A2A" Tag="Red" ToolTip="Kırmızı" Click="RgbColor_Click"/>
-                                            <RadioButton x:Name="RbColorMagenta" GroupName="RgbColorGroup" Style="{StaticResource CreatorColorSwatch}" Background="#F000FF" Tag="Magenta" IsChecked="True" ToolTip="Magenta" Click="RgbColor_Click"/>
+                                            <RadioButton x:Name="RbColorRed" GroupName="RgbColorGroup" Style="{StaticResource CreatorColorSwatch}" Background="#FF2A2A" Tag="Red" IsChecked="True" ToolTip="Kırmızı" Click="RgbColor_Click"/>
+                                            <RadioButton x:Name="RbColorMagenta" GroupName="RgbColorGroup" Style="{StaticResource CreatorColorSwatch}" Background="#F000FF" Tag="Magenta" ToolTip="Magenta" Click="RgbColor_Click"/>
                                             <RadioButton x:Name="RbColorBlue" GroupName="RgbColorGroup" Style="{StaticResource CreatorColorSwatch}" Background="#2563EB" Tag="Blue" ToolTip="Mavi" Click="RgbColor_Click"/>
                                             <RadioButton x:Name="RbColorCyan" GroupName="RgbColorGroup" Style="{StaticResource CreatorColorSwatch}" Background="#00F0FF" Tag="Cyan" ToolTip="Camgöbeği" Click="RgbColor_Click"/>
                                             <RadioButton x:Name="RbColorGreen" GroupName="RgbColorGroup" Style="{StaticResource CreatorColorSwatch}" Background="#10B981" Tag="Green" ToolTip="Yeşil" Click="RgbColor_Click"/>
@@ -1245,7 +1245,7 @@
                                                    FontSize="11.5" Foreground="{StaticResource BrushTextSecondary}" Margin="0,3,0,0"/>
                                     </StackPanel>
                                     <Border Style="{StaticResource TechValueBadge}" HorizontalAlignment="Right" VerticalAlignment="Center">
-                                        <TextBlock x:Name="TxtActiveSensorBadge" Text="El Hareketi" FontSize="12" FontFamily="Consolas, Segoe UI" FontWeight="Bold" Foreground="{StaticResource BrushAccentCyan}"/>
+                                        <TextBlock x:Name="TxtActiveSensorBadge" Text="Dokunmatik" FontSize="12" FontFamily="Consolas, Segoe UI" FontWeight="Bold" Foreground="{StaticResource BrushAccentCyan}"/>
                                     </Border>
                                 </Grid>
 
@@ -1269,6 +1269,7 @@
                                                  Style="{StaticResource CreatorModeTile}"
                                                  Margin="8,0,0,10"
                                                  Padding="18,20"
+                                                 IsChecked="True"
                                                  Tag="Touch"
                                                  Click="SensorMode_Click">
                                         <StackPanel HorizontalAlignment="Center">
@@ -1283,7 +1284,6 @@
                                                  Style="{StaticResource CreatorModeTile}"
                                                  Margin="0,6,8,0"
                                                  Padding="18,20"
-                                                 IsChecked="True"
                                                  Tag="HandSweep"
                                                  Click="SensorMode_Click">
                                         <StackPanel HorizontalAlignment="Center">
